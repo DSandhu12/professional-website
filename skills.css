@@ -1,23 +1,31 @@
-/* ===================== BODY ===================== */
+/* ===== Animations ===== */
+@keyframes gradientMove {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+/* ===== Body ===== */
 body {
   font-family: 'Montserrat', sans-serif;
   color: #fff;
-  min-height: 100vh;
+  overflow: hidden;
+  height: 100vh;
   margin: 0;
-  overflow-x: hidden;
+
+  /* Base gradient */
   background: linear-gradient(135deg, #000000, #111111, #222222, #000000);
-  background-size: 200% 200%;
+  background-size: 200% 200%; /* allows movement */
   transition: background-position 0.1s ease-out;
 }
 
-/* ===== Animations ===== */
-@keyframes gradientMove {
-  0% { background-position: 0% 50%; }
-  50% { background-position: 100% 50%; }
-  100% { background-position: 0% 50%; }
-}
-
-/* ===================== NAVBAR ===================== */
+/* ===== Transparent Navbar ===== */
 .navbar {
   position: fixed;
   top: 0;
@@ -26,20 +34,23 @@ body {
   justify-content: space-between;
   align-items: center;
   padding: 2rem;
-  background-color: transparent;
+  background-color:transparent;
   z-index: 100;
+
 }
 
+/* Logo */
 .nav-logo {
   font-size: 1.3rem;
   font-weight: 700;
-  background: linear-gradient(90deg, #c22028, #cc4342);
-  background-size: 200% 200%;
+  background: linear-gradient(90deg, #c22028, #cc4342, #c22028);
+  background-size: 200% 200%; /* allow movement */
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
-  animation: gradientMove 4s linear infinite;
+  animation: gradientMove 4s linear infinite; /* animate gradient */
 }
 
+/* Navigation Links */
 .nav-right {
   display: flex;
   align-items: center;
@@ -50,18 +61,20 @@ body {
   text-decoration: none;
   font-weight: 600;
   font-size: 1rem;
-  background: linear-gradient(90deg, #c22028, #cc4342);
-  background-size: 200% 200%;
+  background: linear-gradient(90deg, #c22028, #cc4342, #c22028);
+  background-size: 200% 200%; /* allow gradient movement */
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   display: inline-block;
   transition: transform 0.3s ease, opacity 0.3s ease;
+
   animation: gradientMove 3s ease infinite;
 }
 
+/* Hover: move down slightly */
 .nav-link:hover {
   transform: translateY(4px);
-  opacity: 0.8;
+  opacity: 0.8; /* optional fade effect */
 }
 
 /* Dropdown Menu */
@@ -71,14 +84,16 @@ body {
 }
 
 .dropdown-toggle::after {
-  color: #cc4342; /* arrow color matches gradient */
+  color: #c22028; /* arrow color */
   transition: transform 0.3s ease;
 }
 
+/* Rotate arrow when dropdown is open */
 .dropdown.show .dropdown-toggle::after {
   transform: rotate(180deg);
 }
 
+/* Dropdown Content - Glass + Reflection */
 .dropdown-content {
   position: absolute;
   top: 100%;
@@ -87,22 +102,27 @@ body {
   padding: 0.5rem 0;
   z-index: 50;
 
-  /* Glass + reflection effect */
+  /* Glass effect */
   background: rgba(255, 255, 255, 0.06);
   backdrop-filter: blur(28px);
   -webkit-backdrop-filter: blur(28px);
   border-radius: 12px;
   border: 1px solid rgba(255, 255, 255, 0.12);
-  box-shadow: 0 12px 48px rgba(0, 0, 0, 0.25), inset 0 0 12px rgba(255, 255, 255, 0.05);
+  box-shadow: 
+    0 12px 48px rgba(0, 0, 0, 0.25),
+    inset 0 0 12px rgba(255, 255, 255, 0.05);
 
+  /* Animation and hidden state */
   transform: translateY(-20px) scale(0.95);
   opacity: 0;
   pointer-events: none;
   transform-origin: top center;
   transition: transform 0.3s ease, opacity 0.3s ease, backdrop-filter 0.3s ease;
   overflow: hidden;
+  position: absolute; /* ensure removed from flow */
 }
 
+/* Hover / Show state */
 .dropdown:hover .dropdown-content,
 .dropdown.show .dropdown-content {
   transform: translateY(0) scale(1);
@@ -110,6 +130,7 @@ body {
   pointer-events: auto;
 }
 
+/* Reflection overlay */
 .dropdown-content::after {
   content: "";
   position: absolute;
@@ -125,23 +146,34 @@ body {
   z-index: 1;
 }
 
-.dropdown-content:hover::after {
+/* Show dropdown with smooth animation and reflection */
+.dropdown:hover .dropdown-content,
+.dropdown.show .dropdown-content {
+  display: block;
+  transform: translateY(0) scale(1);
   opacity: 1;
+  pointer-events: auto;
 }
 
+.dropdown-content:hover::after {
+  opacity: 1; /* subtle reflection on hover */
+}
+
+/* Dropdown links */
 .dropdown-content a {
   display: block;
   padding: 0.7rem 1rem;
   text-decoration: none;
   font-weight: 500;
-  background: linear-gradient(90deg, #c22028, #cc4342);
+  background: linear-gradient(90deg, #c22028, #cc4342, #c22028);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   transition: transform 0.3s ease, background 0.3s ease;
   position: relative;
-  z-index: 2;
+  z-index: 2; /* keep text above reflection */
 }
 
+/* Hover effect for links: drop slightly */
 .dropdown-content a:hover {
   transform: translateY(5px);
 }
@@ -149,237 +181,182 @@ body {
 /* ===================== MAIN SECTION ===================== */
 .main-section {
   min-height: 100vh;
+  width: 100%;
+  padding: 6rem 1.5rem 2rem;
   display: flex;
-  justify-content: center;
+  flex-direction: column;
+  justify-content: space-evenly;
   align-items: center;
   text-align: center;
   box-sizing: border-box;
 }
 
-/* ===================== SKILLS HEADER ===================== */
-.skills-header {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: center;
-  gap: 3rem;
-  font-size: 5rem;
-  font-weight: 700;
-  flex-wrap: nowrap;
-  margin-bottom: 2rem;
-}
-
-.col.align-items-center {
+.skill-header {
   display: flex;
   flex-direction: column;
   align-items: center;
-  text-align: center;
-  gap: 1rem;
-}
-
-.col.align-items-center i.bi-chevron-down {
-  font-size: 2rem;
-  margin-top: 5rem;
-}
-
-.text-perspective {
-  perspective: 800px;
-  display: flex;
-  justify-content: center;
-}
-
-.text-container {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  text-align: center;
-  gap: 1rem;
+  gap: 0.6rem;
+  margin-bottom: 0.5rem;
 }
 
 .header-row {
   display: flex;
   flex-direction: row;
-  gap: 1rem;
+  gap: 0.6rem;
   align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
 }
 
-.skill-header .white-text {
-  font-size: 3rem;
-}
-
-.skill-header .gradient-text {
-  font-size: 3rem;
-  background-size: 200% 200%;
+.gradient-text {
+  font-size: clamp(1.5rem, 4vw, 2.2rem);
   font-weight: 700;
-
   background: linear-gradient(90deg, #c22028, #cc4342, #c22028);
+  background-size: 200% 200%;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
-  background-clip: text;
-
-  /* Animate gradient */
   animation: gradientMove 3s ease infinite;
 }
 
-.skill-header {
-  display: block;
-  font-size: 1.5rem;
-  font-weight: 400;
+.white-text {
+  font-size: clamp(1.5rem, 4vw, 2.2rem);
+  color: #fff;
+}
+
+.skill-subheader {
+  font-size: clamp(0.85rem, 2.5vw, 0.95rem);
+  max-width: 700px;
   color: #ccc;
-  margin: 0.5rem auto 0;
-  text-align: center;
+  line-height: 1.4;
+  margin: 0 auto;
 }
 
 /* ===================== GLASS CARDS ===================== */
-
 .card-header-outside {
-  font-size: 1.5rem;
+  font-size: 1.1rem;
   font-weight: 600;
-  margin-bottom: 1rem 0 0 1rem;
+  margin-bottom: 0.6rem;
   background: linear-gradient(90deg, #c22028, #cc4342);
-  background-size: 200% 200%; /* allows movement */
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   text-align: center;
-  animation: gradientMove 3s ease infinite; /* animated gradient */
+  animation: gradientMove 3s ease infinite;
 }
-
 
 .glass-card {
-  width: 100%;
   background: rgba(255, 255, 255, 0.06);
-  backdrop-filter: blur(28px);
-  -webkit-backdrop-filter: blur(28px);
-  border-radius: 20px;
-  border: 1px solid rgba(255, 255, 255, 0.12);
-  box-shadow: 0 12px 48px rgba(0, 0, 0, 0.25), inset 0 0 12px rgba(255, 255, 255, 0.05);
-  position: relative;
-  overflow: hidden;
-  padding: 2rem;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  flex: 1;
-  margin-bottom: 3rem;
-}
+  backdrop-filter: blur(16px);
+  border-radius: 14px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  padding: 1rem;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+  transition: transform 0.3s ease;
 
-.glass-card::after {
-  content: "";
-  position: absolute;
-  top: var(--reflection-y, 50%);
-  left: var(--reflection-x, 50%);
-  width: 200%;
-  height: 200%;
-  background: radial-gradient(circle at center, rgba(255,255,255,0.2) 0%, rgba(255,255,255,0) 50%);
-  pointer-events: none;
-  transform: translate(-50%, -50%);
-  opacity: 0;
-  transition: opacity 0.3s ease;
-  z-index: 1;
-}
-
-.glass-card:hover::after {
-  opacity: 1;
+  
 }
 
 .glass-card:hover {
-  transform: translateY(-6px);
-  box-shadow: 0 16px 56px rgba(0, 0, 0, 0.35), inset 0 0 16px rgba(255,255,255,0.08);
+  transform: translateY(-3px);
 }
 
-.glass-card > * {
-  position: relative;
-  z-index: 2;
-}
-
-/* ===================== ICON GRID ===================== */
-.glass-card .row.row-cols-2 {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 2rem;
-  width: 100%;
-  max-width: 400px;
-  margin: 0 auto;
-  justify-items: center;
-  align-items: center;
-}
-
-.glass-card .row.row-cols-2 .col {
-  padding: 0;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
+/* ===================== ICONS ===================== */
 .glass-card img {
-  width: 80px;
-  height: 80px;
+  width: clamp(40px, 5vw, 50px);
+  height: auto;
   object-fit: contain;
-  transition: transform 0.2s ease;
+  transition: transform 0.25s ease;
+  display: block;
+  margin: 0 auto;
 }
 
 .glass-card img:hover {
   transform: scale(1.1);
 }
 
-.icon-label {
-  display: block;
+/* Mobile: slightly smaller icons to fit the layout better */
+@media (max-width: 992px) {
+  .glass-card img {
+    width: clamp(45px, 6vw, 65px);
+  }
+}
+
+@media (max-width: 576px) {
+  .glass-card img {
+    width: clamp(40px, 8vw, 55px);
+  }
+}
+
+/* ===================== SKILL LABELS ===================== */
+.skill-label {
+  font-size: clamp(0.65rem, 2vw, 0.8rem);
+  margin-top: 0.3rem;
+  color: rgba(255, 255, 255, 0.8);
+  font-weight: 500;
   text-align: center;
-  margin-top: 6px;
-  font-size: 0.9rem;
-  color: #fff;
-  opacity: 0.8;
-}
-
-
-.glass-card .d-flex {
-  justify-content: center;
-  align-items: center;
-  gap: 2rem;
-  width: 100%;
-}
-
-.glass-card .d-flex img {
-  width: 80px;
-  height: 80px;
-  object-fit: contain;
 }
 
 /* ===================== SOFT SKILLS ===================== */
 .soft-skills-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-  gap: 1.5rem;
+  grid-template-columns: repeat(auto-fit, minmax(110px, 1fr));
+  gap: 0.8rem;
   justify-items: center;
   align-items: center;
   width: 100%;
-  padding: 1rem 0;
 }
 
-.soft-skills-grid .skill {
-  padding: 1rem 1.5rem;
+.soft-skills-grid div {
+  padding: 0.5rem 0.8rem;
   font-weight: 500;
-  font-size: 1.1rem;
+  font-size: clamp(0.8rem, 2vw, 0.95rem);
   color: #fff;
-  text-align: center;
   background: rgba(255, 255, 255, 0.05);
-  border-radius: 12px;
+  border-radius: 10px;
   border: 1px solid rgba(255, 255, 255, 0.1);
   transition: transform 0.2s ease, background 0.2s ease;
-  white-space: nowrap;
+  text-align: center;
 }
 
-.soft-skills-grid .skill:hover {
-  transform: translateY(-5px);
+.soft-skills-grid div:hover {
+  transform: translateY(-3px);
   background: rgba(255, 255, 255, 0.08);
 }
 
-.glass-card p {
-  font-size: 1.2rem;
-  line-height: 1.8;
-  color: #ccc;
-  margin: 0;
+/* ===================== FOOTER ===================== */
+.skills-footer {
+  margin-top: 1rem;
+  font-size: clamp(0.7rem, 2vw, 0.85rem);
+  color: #bbb;
   text-align: center;
+}
+
+/* ===================== RESPONSIVE BREAKPOINTS ===================== */
+@media (max-width: 992px) {
+  .navbar {
+    padding: 0.8rem 1.5rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .navbar {
+    flex-direction: column;
+    gap: 0.4rem;
+    text-align: center;
+  }
+  .main-section {
+    padding-top: 6rem;
+  }
+}
+
+@media (max-width: 576px) {
+  .nav-right {
+    flex-direction: column;
+    gap: 0.6rem;
+  }
+  .glass-card {
+    padding: 0.8rem;
+  }
+  .skill-subheader {
+    max-width: 90%;
+  }
 }

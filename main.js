@@ -114,24 +114,6 @@ document.querySelectorAll('.glass-card').forEach(card => {
     });
 });
 
-document.querySelectorAll('.icon img').forEach(img => {
-  const altText = img.alt;
-  if (altText) {
-    const label = document.createElement('span');
-    label.textContent = altText;
-    label.className = 'icon-label';
-    const parent = img.parentElement;
-
-    // Make sure parent behaves like a column
-    parent.style.display = 'flex';
-    parent.style.flexDirection = 'column';
-    parent.style.alignItems = 'center';
-    parent.style.textAlign = 'center';
-
-    img.insertAdjacentElement('afterend', label);
-  }
-});
-
 document.body.insertAdjacentHTML('beforeend', `
   <footer style="
     position: fixed;
@@ -147,3 +129,13 @@ document.body.insertAdjacentHTML('beforeend', `
     &copy; 2025 Dharmveer Sandhu. All rights reserved.
   </footer>
 `);
+
+window.addEventListener('scroll', function() {
+  const navbar = document.querySelector('.navbar');
+  const maxScroll = 200; // scroll distance over which fade occurs
+  const opacity = Math.min(window.scrollY / maxScroll, 1); // max 0.8
+
+  navbar.style.background = `linear-gradient(to bottom, rgba(0, 0, 0, ${opacity}), rgba(0, 0, 0, 0))`;
+});
+
+
