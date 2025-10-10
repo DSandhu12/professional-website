@@ -1,0 +1,351 @@
+/* ===== Animations ===== */
+@keyframes gradientMove {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+/* ===== Body ===== */
+body {
+  font-family: 'Montserrat', sans-serif;
+  color: #fff;
+  overflow: hidden;
+  height: 100vh;
+  margin: 0;
+
+  /* Base gradient */
+  background: linear-gradient(135deg, #000000, #111111, #222222, #000000);
+  background-size: 200% 200%; /* allows movement */
+  transition: background-position 0.1s ease-out;
+}
+
+/* ===== Transparent Navbar ===== */
+.navbar {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 2rem;
+  background-color:transparent;
+  z-index: 100;
+
+}
+
+/* Logo */
+.nav-logo {
+  font-size: 1.3rem;
+  font-weight: 700;
+  background: linear-gradient(90deg, #0d41e1, #07c8f9, #0d41e1);
+  background-size: 200% 200%; /* allow movement */
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: gradientMove 4s linear infinite; /* animate gradient */
+}
+
+/* Navigation Links */
+.nav-right {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+}
+
+.nav-link {
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 1rem;
+  background: linear-gradient(90deg, #0d41e1, #07c8f9, #0d41e1);
+  background-size: 200% 200%; /* allow gradient movement */
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  display: inline-block;
+  transition: transform 0.3s ease, opacity 0.3s ease;
+
+  animation: gradientMove 3s ease infinite;
+}
+
+/* Hover: move down slightly */
+.nav-link:hover {
+  transform: translateY(4px);
+  opacity: 0.8; /* optional fade effect */
+}
+
+/* Dropdown Menu */
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+.dropdown-toggle::after {
+  color: #07c8f9; /* arrow color */
+  transition: transform 0.3s ease;
+}
+
+/* Rotate arrow when dropdown is open */
+.dropdown.show .dropdown-toggle::after {
+  transform: rotate(180deg);
+}
+
+/* Dropdown Content - Glass + Reflection */
+.dropdown-content {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  min-width: 160px;
+  padding: 0.5rem 0;
+  z-index: 50;
+
+  /* Glass effect */
+  background: rgba(255, 255, 255, 0.06);
+  backdrop-filter: blur(28px);
+  -webkit-backdrop-filter: blur(28px);
+  border-radius: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  box-shadow: 
+    0 12px 48px rgba(0, 0, 0, 0.25),
+    inset 0 0 12px rgba(255, 255, 255, 0.05);
+
+  /* Animation and hidden state */
+  transform: translateY(-20px) scale(0.95);
+  opacity: 0;
+  pointer-events: none;
+  transform-origin: top center;
+  transition: transform 0.3s ease, opacity 0.3s ease, backdrop-filter 0.3s ease;
+  overflow: hidden;
+  position: absolute; /* ensure removed from flow */
+}
+
+/* Hover / Show state */
+.dropdown:hover .dropdown-content,
+.dropdown.show .dropdown-content {
+  transform: translateY(0) scale(1);
+  opacity: 1;
+  pointer-events: auto;
+}
+
+/* Reflection overlay */
+.dropdown-content::after {
+  content: "";
+  position: absolute;
+  top: var(--reflection-y, 50%);
+  left: var(--reflection-x, 50%);
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(circle at center, rgba(255,255,255,0.2) 0%, rgba(255,255,255,0) 50%);
+  pointer-events: none;
+  transform: translate(-50%, -50%);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  z-index: 1;
+}
+
+/* Show dropdown with smooth animation and reflection */
+.dropdown:hover .dropdown-content,
+.dropdown.show .dropdown-content {
+  display: block;
+  transform: translateY(0) scale(1);
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.dropdown-content:hover::after {
+  opacity: 1; /* subtle reflection on hover */
+}
+
+/* Dropdown links */
+.dropdown-content a {
+  display: block;
+  padding: 0.7rem 1rem;
+  text-decoration: none;
+  font-weight: 500;
+  background: linear-gradient(90deg, #0d41e1, #07c8f9);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  transition: transform 0.3s ease, background 0.3s ease;
+  position: relative;
+  z-index: 2; /* keep text above reflection */
+}
+
+/* Hover effect for links: drop slightly */
+.dropdown-content a:hover {
+  transform: translateY(5px);
+}
+
+
+/* ===== Main Section ===== */
+.main-section {
+  min-height: 100vh; /* Fill viewport height */
+  display: flex;
+  flex-direction: column;
+  justify-content: center; /* Center content vertically */
+  padding-top: 6rem; /* Space for navbar */
+  padding-bottom: 2rem;
+  margin-top: 2rem;
+}
+
+/* Remove Bootstrap's default margins */
+.main-section .row {
+  margin: 0;
+}
+
+/* ===== Left Column (Image + Blob) ===== */
+.col-12.col-md-6.position-relative {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Blob Animation */
+#blob {
+  position: absolute;
+  width: 400px;   /* increased size */
+  height: 400px;  /* increased size */
+  background: radial-gradient(circle at 30% 30%, #0d41e1, #07c8f9);
+  border-radius: 50%;
+  filter: blur(60px);
+  transition: transform 0.3s ease-out;
+  animation: blobMorph 8s infinite ease-in-out;
+  z-index: 0;       /* behind image */
+  transform: translate(-50%, -50%); /* perfectly centered */
+}
+
+
+@keyframes blobMorph {
+  0% { border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%; }
+  50% { border-radius: 30% 60% 70% 40% / 50% 60% 30% 60%; }
+  100% { border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%; }
+}
+
+/* Profile Image */
+.col-12.col-md-6.position-relative img.img-fluid {
+  max-width: 400px;
+  width: 100%;
+  height: auto;
+  border-radius: 12px;
+  position: absolute;
+  z-index: 1;
+  
+  /* Make the image pop */
+  filter: brightness(1.2) contrast(1.3) drop-shadow(0 0 15px rgba(255, 255, 255, 0.2));
+  
+  /* Fade out bottom half */
+  -webkit-mask-image: linear-gradient(to bottom, rgba(0,0,0,1) 60%, rgba(0,0,0,0) 100%);
+  -webkit-mask-repeat: no-repeat;
+  -webkit-mask-size: cover;
+  mask-image: linear-gradient(to bottom, rgba(0,0,0,1) 60%, rgba(0,0,0,0) 100%);
+  mask-repeat: no-repeat;
+  mask-size: cover;
+}
+
+
+/* ===== Right Column Text ===== */
+.col-12.col-md-6 h2 {
+  font-size: 2rem;
+  font-weight: 600;
+  line-height: 1.3;
+  margin: 0.5rem 0;
+}
+
+.col-12.col-md-6 h2.greetings {
+  font-size: 3rem; /* or 3rem, 3.5rem, etc. */
+  font-weight: 600;
+  line-height: 1.3;
+  margin: 0.5rem 0;
+}
+
+.white-text {
+  color: #fff;
+}
+
+.gradient-text {
+  background: linear-gradient(90deg, #0d41e1, #07c8f9, #0d41e1); /* repeat start color for smooth loop */
+  background-size: 200% 200%; /* allows gradient movement */
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+
+  /* Animate gradient */
+  animation: gradientMove 3s ease infinite;
+}
+
+.cursor {
+  display: inline-block;
+  width: 2px;
+  height: 1em; /* match text height */
+  background-color: #07c8f9; /* solid color */
+  margin-left: 2px;
+  vertical-align: bottom;
+  animation: blink 0.7s infinite;
+  color: transparent; /* prevent any text rendering */
+  text-shadow: none;  /* remove text shadow */
+}
+
+
+
+@keyframes blink {
+  0%, 50%, 100% { opacity: 1; }
+  25%, 75% { opacity: 0; }
+}
+
+
+.col-12.col-md-6 p {
+  font-size: 1rem;
+  line-height: 1.6;
+  margin-top: 1rem;
+  text-align: justify;
+}
+
+.social-icon {
+  width: 40px;   /* adjust size */
+  height: 40px;  /* maintain square aspect */
+  transition: transform 0.3s;
+}
+
+.social-icon:hover {
+  transform: scale(1.2); /* hover effect */
+}
+
+
+/* ===== Bottom Row ===== */
+.bottom-row {
+  margin-top: 10rem;
+  margin-bottom: 5rem;
+  gap: 5rem;
+}
+
+
+.bottom-row p {
+  font-size: 1.1rem;
+  color: #fff;
+  margin-bottom: 0;
+}
+
+.bottom-row .d-flex {
+  gap: 10rem; /* horizontal space between role-blocks */
+}
+
+.role-block {
+    text-align: left; /* center the text inside each block */
+}
+
+.role-block .role {
+    font-weight: 600; /* label bold */
+    font-size: 1.1rem;
+    display: block;
+    margin-bottom: 0.3rem;
+}
+
+.role-block .description {
+    font-weight: 100; /* light font for description */
+    font-size: 1rem;
+    margin: 0;
+    color: #fff;
+}

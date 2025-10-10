@@ -1,0 +1,417 @@
+/* ===== Animations ===== */
+@keyframes gradientMove {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* ===================== BODY ===================== */
+body {
+  font-family: 'Montserrat', sans-serif;
+  color: #fff;
+  min-height: 100vh;
+  margin: 0;
+  overflow-x: hidden;
+  background: linear-gradient(135deg, #000000, #111111, #222222, #000000);
+  background-size: 200% 200%;
+  transition: background-position 0.1s ease-out;
+}
+
+/* ===== Transparent Navbar ===== */
+.navbar {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 2rem;
+  background-color:transparent;
+  z-index: 100;
+
+}
+
+/* Logo */
+.nav-logo {
+  font-size: 1.3rem;
+  font-weight: 700;
+  background: linear-gradient(90deg, #ffc44d, #ffdc62, #ffc44d);
+  background-size: 200% 200%; /* allow movement */
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: gradientMove 4s linear infinite; /* animate gradient */
+}
+
+/* Navigation Links */
+.nav-right {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+}
+
+.nav-link {
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 1rem;
+  background: linear-gradient(90deg, #ffc44d, #ffdc62, #ffc44d);
+  background-size: 200% 200%; /* allow gradient movement */
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  display: inline-block;
+  transition: transform 0.3s ease, opacity 0.3s ease;
+
+  animation: gradientMove 3s ease infinite;
+}
+
+/* Hover: move down slightly */
+.nav-link:hover {
+  transform: translateY(4px);
+  opacity: 0.8; /* optional fade effect */
+}
+
+/* Dropdown Menu */
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+.dropdown-toggle::after {
+  color: #ffdc62;
+  transition: transform 0.3s ease;
+}
+
+/* Rotate arrow when dropdown is open */
+.dropdown.show .dropdown-toggle::after {
+  transform: rotate(180deg);
+}
+
+/* Dropdown Content - Glass + Reflection */
+.dropdown-content {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  min-width: 160px;
+  padding: 0.5rem 0;
+  z-index: 50;
+
+  /* Glass effect */
+  background: rgba(255, 255, 255, 0.06);
+  backdrop-filter: blur(28px);
+  -webkit-backdrop-filter: blur(28px);
+  border-radius: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  box-shadow: 
+    0 12px 48px rgba(0, 0, 0, 0.25),
+    inset 0 0 12px rgba(255, 255, 255, 0.05);
+
+  /* Animation and hidden state */
+  transform: translateY(-20px) scale(0.95);
+  opacity: 0;
+  pointer-events: none;
+  transform-origin: top center;
+  transition: transform 0.3s ease, opacity 0.3s ease, backdrop-filter 0.3s ease;
+  overflow: hidden;
+  position: absolute; /* ensure removed from flow */
+}
+
+/* Hover / Show state */
+.dropdown:hover .dropdown-content,
+.dropdown.show .dropdown-content {
+  transform: translateY(0) scale(1);
+  opacity: 1;
+  pointer-events: auto;
+}
+
+/* Reflection overlay */
+.dropdown-content::after {
+  content: "";
+  position: absolute;
+  top: var(--reflection-y, 50%);
+  left: var(--reflection-x, 50%);
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(circle at center, rgba(255,255,255,0.2) 0%, rgba(255,255,255,0) 50%);
+  pointer-events: none;
+  transform: translate(-50%, -50%);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  z-index: 1;
+}
+
+/* Show dropdown with smooth animation and reflection */
+.dropdown:hover .dropdown-content,
+.dropdown.show .dropdown-content {
+  display: block;
+  transform: translateY(0) scale(1);
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.dropdown-content:hover::after {
+  opacity: 1; /* subtle reflection on hover */
+}
+
+/* Dropdown links */
+.dropdown-content a {
+  display: block;
+  padding: 0.7rem 1rem;
+  text-decoration: none;
+  font-weight: 500;
+  background: linear-gradient(90deg, #ffc44d, #ffdc62, #ffc44d);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  transition: transform 0.3s ease, background 0.3s ease;
+  position: relative;
+  z-index: 2; /* keep text above reflection */
+}
+
+/* Hover effect for links: drop slightly */
+.dropdown-content a:hover {
+  transform: translateY(5px);
+}
+
+/* ===================== MAIN SECTION ===================== */
+.main-section {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: 0 2rem;
+  box-sizing: border-box;
+}
+
+/* ===================== EXPERIENCE HEADER ===================== */
+.experience-header {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  gap: 3rem;
+  font-size: 3rem;
+  font-weight: 700;
+  flex-wrap: nowrap;
+  margin-bottom: 2rem;
+}
+
+.row > i.bi-chevron-down {
+  display: block;
+  margin: -5rem auto 0;
+  font-size: 3rem;
+  animation: bounce 2s infinite;
+}
+
+/* Optional bounce animation */
+@keyframes bounce {
+  0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+  40% { transform: translateY(10px); }
+  60% { transform: translateY(5px); }
+}
+
+/* Text container 3D tilt */
+.text-perspective {
+  perspective: 800px;
+}
+
+.text-container {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  transform: rotateY(-25deg);
+  transform-origin: left center;
+  transition: transform 0.3s ease;
+}
+
+.experience-header .white-text {
+  font-size: 3rem;
+}
+
+.experience-header .gradient-text {
+  font-size: 3rem;
+  background-size: 200% 200%;
+  
+
+  background: linear-gradient(90deg, #805808, #ffdc62, #ffc44d);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+
+  /* Animate gradient */
+  animation: gradientMove 3s ease infinite;
+}
+
+.experience-header .experience-subheader {
+  display: block;
+  font-size: 1.5rem;
+  font-weight: 400;
+  color: #ccc;
+  margin-top: 0.5rem;
+  text-align: left;
+}
+
+/* 3D model size */
+model-viewer {
+  width: 600px;
+  height: 600px;
+}
+
+/* ===================== GLASS CARD SECTION ===================== */
+.five-rows-section {
+  padding: 4rem 2rem;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* GLASS CARD */
+.glass-card {
+  margin-bottom: 3rem;
+  padding: 2rem;
+  border-radius: 20px;
+  background: rgba(255, 255, 255, 0.06);
+  backdrop-filter: blur(28px);
+  -webkit-backdrop-filter: blur(28px);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  box-shadow: 
+    0 12px 48px rgba(0, 0, 0, 0.25),
+    inset 0 0 12px rgba(255, 255, 255, 0.05);
+  position: relative;
+  overflow: hidden;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  word-wrap: break-word;
+  transform: perspective(1000px) rotateY(5deg);
+}
+
+/* Alternate angle for every other card */
+.glass-card:nth-child(even) {
+  transform: perspective(1000px) rotateY(-5deg);
+}
+
+/* Reflection effect overlay */
+.glass-card::after {
+  content: "";
+  position: absolute;
+  top: var(--reflection-y, 50%);
+  left: var(--reflection-x, 50%);
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(circle at center, rgba(255,255,255,0.2) 0%, rgba(255,255,255,0) 50%);
+  pointer-events: none;
+  transform: translate(-50%, -50%);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  z-index: 1;
+}
+
+.glass-card:hover::after {
+  opacity: 1;
+}
+
+.glass-card:hover {
+  transform: perspective(1000px) rotateY(5deg) translateY(-6px);
+  box-shadow: 
+    0 16px 56px rgba(0, 0, 0, 0.35),
+    inset 0 0 16px rgba(255, 255, 255, 0.08);
+}
+
+/* Maintain angle on hover for even cards */
+.glass-card:nth-child(even):hover {
+  transform: perspective(1000px) rotateY(-5deg) translateY(-6px);
+}
+
+/* Ensure content stays above reflection */
+.glass-card > * {
+  position: relative;
+  z-index: 2;
+}
+
+/* ROW HEADER */
+.row-header {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  margin-bottom: 1rem;
+  flex-wrap: wrap;
+}
+
+.row-logo {
+  width: 80px;
+  height: 80px;
+  object-fit: contain;
+  flex-shrink: 0;
+}
+
+.row-title {
+  font-size: 2rem;
+  font-weight: 700;
+  background: linear-gradient(90deg, #ffc44d, #ffdc62);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  margin-bottom: 0.5rem;
+  word-break: break-word;
+}
+
+.row-date {
+  text-align: left;
+  font-size: 1.1rem;
+  font-weight: 500;
+  background: linear-gradient(90deg, #ebca46, #995226);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  margin-bottom: 1rem;
+}
+
+.row-paragraph {
+  font-size: 1rem;
+  color: #ccc;
+  line-height: 1.6;
+  margin-bottom: 1rem;
+}
+
+/* ROW IMAGES - iOS Glass Style */
+.row-img {
+  width: 100%;              /* fills the column */
+  height: auto;             /* maintains aspect ratio */
+  border-radius: 20px;      /* soft rounded corners */
+  object-fit: cover;        /* fills the area nicely */
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1); /* subtle depth */
+  backdrop-filter: blur(10px); /* adds glass blur effect behind image */
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* Optional hover effect */
+.row-img:hover {
+  transform: scale(1.03);   /* slight zoom */
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.15);
+}
+
+
+.row-break {
+  height: 2rem;
+}
+
+/* ===================== RESPONSIVE ===================== */
+@media (max-width: 768px) {
+  .row-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.5rem;
+  }
+
+  .row-logo {
+    width: 60px;
+    height: 60px;
+  }
+
+  .row-title {
+    font-size: 1.5rem;
+  }
+
+  model-viewer {
+    width: 100%;
+    height: auto;
+  }
+  
+  .glass-card {
+    padding: 1.5rem;
+  }
+}

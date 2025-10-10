@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Advocacy Page</title>
+
+
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="advocacy.css">
+
+  <script type="module" src="https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js"></script>
+
+  </head>
+<body>
+
+  <!-- Transparent Navbar -->
+<nav class="navbar">
+  <div class="nav-left">
+    <h1 class="nav-logo">Advocacy Page</h1>
+  </div>
+  <div class="nav-right">
+    <a href="index.html" class="nav-link">Home</a>
+
+    <div class="dropdown">
+      <a href="#" class="nav-link dropdown-toggle">About Me</a>
+      <div class="dropdown-content">
+        <a href="#">Advocacy</a>
+        <a href="education.html">Education</a>
+        <a href="skills.html">Skills / Techstack</a>
+      </div>
+    </div>
+
+    <div class="dropdown">
+      <a href="#" class="nav-link dropdown-toggle">Achievements</a>
+      <div class="dropdown-content">
+        <a href="experience.html">Experience</a>
+        <a href="certification.html">Certifications and Training</a>
+      </div>
+    </div>
+
+    <a href="portfolio.html" class="nav-link">Portfolio</a>
+    <a href="contact.html" class="nav-link">Contact</a>
+  </div>
+</nav>
+
+
+  <!-- Main Content -->
+  <section class="main-section">
+  <div class="advocacy-container">
+    <!-- Left: Header + Paragraph -->
+    <div class="text-column">
+      <div class="advocacy-header">
+        <span class="white-text">My</span>
+        <span class="gradient-text">ADVOCACY</span>
+      </div>
+
+      <p class="advocacy-paragraph">
+        I advocate for building technology that creates measurable social good — accessible education, empowered local businesses, and cleaner communities. Through projects like a gamified language-learning app for children, a POS system for MSMEs, and TrashScan for neighborhood waste monitoring, I focus on practical solutions that help people, not just technical novelty. I believe inclusive design and responsible AI are essential: tools should be usable by everyone and minimize harm while amplifying benefit. My goal is to use software to make everyday life easier, fairer, and more resilient for Filipino communities.
+      </p>
+    </div>
+
+    <!-- Right: 3D Model -->
+    <div class="model-column">
+      <model-viewer 
+        src="images/megaphone.glb" 
+        alt="3D Megaphone" 
+        auto-rotate 
+        camera-controls 
+        disable-zoom
+        style="width: 300px; height: 300px;">
+      </model-viewer>
+    </div>
+  </div>
+</section>
+
+  <script src="main.js" defer></script>
+</body>
+</html>

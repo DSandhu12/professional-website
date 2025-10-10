@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Education</title>
+
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+  <link rel="stylesheet" href="experience.css">
+
+  <script type="module" src="https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js"></script>
+</head>
+<body>
+
+  <!-- Transparent Navbar -->
+<nav class="navbar">
+  <div class="nav-left">
+    <h1 class="nav-logo">Experiences Page</h1>
+  </div>
+  <div class="nav-right">
+    <a href="index.html" class="nav-link">Home</a>
+
+    <div class="dropdown">
+      <a href="#" class="nav-link dropdown-toggle">About Me</a>
+      <div class="dropdown-content">
+        <a href="advocacy.html">Advocacy</a>
+        <a href="education.html">Education</a>
+        <a href="skills.html">Skills / Techstack</a>
+      </div>
+    </div>
+
+    <div class="dropdown">
+      <a href="#" class="nav-link dropdown-toggle">Achievements</a>
+      <div class="dropdown-content">
+        <a href="#">Experience</a>
+        <a href="certification.html">Certifications and Training</a>
+      </div>
+    </div>
+
+    <a href="portfolio.html" class="nav-link">Portfolio</a>
+    <a href="contact.html" class="nav-link">Contact</a>
+  </div>
+</nav>
+
+  <!-- Main Content -->
+  <section class="main-section container">
+    <div class="row align-items-center">
+      <!-- Right Column: Header + Paragraph -->
+      <div class="experience-header">
+        <model-viewer 
+            src="images/gold_star.glb" 
+            alt="3D Graduation Hat" 
+            auto-rotate 
+            camera-controls 
+            disable-zoom>
+        </model-viewer>
+
+        <div class="text-perspective parallax-container">
+          <div class="text-container">
+            <span class="gradient-text">EXPERIENCES</span>
+            <span class="experience-subheader">What have I done so far?</span>
+          </div>
+        </div>
+      </div>
+      <i class="bi bi-chevron-down"></i>
+    </div>
+  </section>
+
+<!-- Education / Experience Section -->
+<section class="five-rows-section container">
+
+<!-- Row 1 -->
+<div class="glass-card project-card">
+  <div class="row align-items-center">
+    
+    <!-- Left Column: Text -->
+    <div class="col-md-7">
+      <h3 class="row-date">Jan 2025 - Present</h3>
+      <div class="row-header">
+        <h3 class="row-title">
+          TrashScan: A Surveillance-Powered Integrated System for Monitoring Real-Time Street Litter Density utilizing Convolutional Neural Networks
+        </h3>
+      </div>
+      <p class="row-paragraph">
+        Academic thesis project: AI-powered surveillance system to detect and monitor street litter in near-real-time. <br><br>
+        Built an end-to-end AI surveillance system integrating YOLOv8 (Flask/Python backend) with an Electron/Node.js frontend to process live RTSP feeds and uploads; includes multi-camera viewing, hotspot heatmaps/Google Street View, and SMS alerting.
+        <br><br>
+        Role: QA & Developer — defined features and UX, developed litter-density calculation logic, optimized model training and multi-camera inference, implemented multi-stream handling, and triaged bugs.
+      </p>
+    </div>
+
+    <!-- Right Column: Image -->
+    <div class="col-md-5 text-center">
+      <img src="images/thesis_image.png" alt="TrashScan Preview" class="row-img">
+    </div>
+
+  </div>
+</div>
+
+
+<!-- Row 2 -->
+<div class="glass-card project-card">
+  <div class="row align-items-center">
+    
+    <!-- Left Column: Text -->
+    <div class="col-md-7">
+      <h3 class="row-date">March 2025</h3>
+      <div class="row-header">
+        <h3 class="row-title">
+          BEBOL’S WORLD - Grand Champion - SIKAPTala 2025: The National CS & IT Competition
+      </div>
+      <p class="row-paragraph">
+        National CS & IT ideathon; pitched a gamified language-learning product for children. <br><br>
+        Contributed to the conceptualization and product design of Bebol’s World, a gamified language-learning app with voice-recording pronunciation analysis, role-play modules, and parental monitoring; part of the Champion-winning team.
+        Contributed to feature specs and UX flows, coordinated team research, prepared pitch materials, and showcased pedagogical integrations to judges.
+      </p>
+    </div>
+
+    <!-- Right Column: Image -->
+    <div class="col-md-5 text-center">
+      <img src="images/bebols_image.jpg" alt="TrashScan Preview" class="row-img">
+    </div>
+
+  </div>
+</div>
+
+<!-- Row 3 -->
+<div class="glass-card project-card">
+  <div class="row align-items-center">
+    
+    <!-- Left Column: Text -->
+    <div class="col-md-7">
+      <h3 class="row-date">November 2024</h3>
+      <div class="row-header">
+        <h3 class="row-title">
+          2nd Place - IngeniumSTEM Summer Hacks 2.0
+      </div>
+      <p class="row-paragraph">
+        Awarded 2nd Place, Most Innovative, and Best Use of AI at IngeniumSTEM Summer Hacks 2.0 (hosted on Devpost) for NEXUS, an AI-driven mentoring platform designed to provide personalized learning and skill development for students. The competition featured over 700 participants worldwide, emphasizing innovation and social impact through technology.
+    </div>
+
+    <!-- Right Column: Image -->
+    <div class="col-md-5 text-center">
+      <img src="images/nexus_image.png" alt="TrashScan Preview" class="row-img">
+    </div>
+
+  </div>
+</div>
+
+</section>
+
+  <script src="main.js" defer></script>
+</body>
+</html>

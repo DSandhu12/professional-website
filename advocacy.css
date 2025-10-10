@@ -1,0 +1,265 @@
+/* ===== Animations ===== */
+@keyframes gradientMove {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+/* ===== Body ===== */
+body {
+  font-family: 'Montserrat', sans-serif;
+  color: #fff;
+  overflow: hidden;
+  height: 100vh;
+  margin: 0;
+
+  /* Base gradient */
+  background: linear-gradient(135deg, #000000, #111111, #222222, #000000);
+  background-size: 200% 200%; /* allows movement */
+  transition: background-position 0.1s ease-out;
+}
+
+/* ===== Transparent Navbar ===== */
+.navbar {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 2rem;
+  background-color:transparent;
+  z-index: 100;
+
+}
+
+/* Logo */
+.nav-logo {
+  font-size: 1.3rem;
+  font-weight: 700;
+  background: linear-gradient(90deg, #118349, #6dc61e, #118349);
+  background-size: 200% 200%; /* allow movement */
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: gradientMove 4s linear infinite; /* animate gradient */
+}
+
+/* Navigation Links */
+.nav-right {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+}
+
+.nav-link {
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 1rem;
+  background: linear-gradient(90deg, #118349, #6dc61e, #118349);
+  background-size: 200% 200%; /* allow gradient movement */
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  display: inline-block;
+  transition: transform 0.3s ease, opacity 0.3s ease;
+
+  animation: gradientMove 3s ease infinite;
+}
+
+/* Hover: move down slightly */
+.nav-link:hover {
+  transform: translateY(4px);
+  opacity: 0.8; /* optional fade effect */
+}
+
+/* Dropdown Menu */
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+.dropdown-toggle::after {
+  color: #6dc61e; /* arrow color */
+  transition: transform 0.3s ease;
+}
+
+/* Rotate arrow when dropdown is open */
+.dropdown.show .dropdown-toggle::after {
+  transform: rotate(180deg);
+}
+
+/* Dropdown Content - Glass + Reflection */
+.dropdown-content {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  min-width: 160px;
+  padding: 0.5rem 0;
+  z-index: 50;
+
+  /* Glass effect */
+  background: rgba(255, 255, 255, 0.06);
+  backdrop-filter: blur(28px);
+  -webkit-backdrop-filter: blur(28px);
+  border-radius: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  box-shadow: 
+    0 12px 48px rgba(0, 0, 0, 0.25),
+    inset 0 0 12px rgba(255, 255, 255, 0.05);
+
+  /* Animation and hidden state */
+  transform: translateY(-20px) scale(0.95);
+  opacity: 0;
+  pointer-events: none;
+  transform-origin: top center;
+  transition: transform 0.3s ease, opacity 0.3s ease, backdrop-filter 0.3s ease;
+  overflow: hidden;
+  position: absolute; /* ensure removed from flow */
+}
+
+/* Hover / Show state */
+.dropdown:hover .dropdown-content,
+.dropdown.show .dropdown-content {
+  transform: translateY(0) scale(1);
+  opacity: 1;
+  pointer-events: auto;
+}
+
+/* Reflection overlay */
+.dropdown-content::after {
+  content: "";
+  position: absolute;
+  top: var(--reflection-y, 50%);
+  left: var(--reflection-x, 50%);
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(circle at center, rgba(255,255,255,0.2) 0%, rgba(255,255,255,0) 50%);
+  pointer-events: none;
+  transform: translate(-50%, -50%);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  z-index: 1;
+}
+
+/* Show dropdown with smooth animation and reflection */
+.dropdown:hover .dropdown-content,
+.dropdown.show .dropdown-content {
+  display: block;
+  transform: translateY(0) scale(1);
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.dropdown-content:hover::after {
+  opacity: 1; /* subtle reflection on hover */
+}
+
+/* Dropdown links */
+.dropdown-content a {
+  display: block;
+  padding: 0.7rem 1rem;
+  text-decoration: none;
+  font-weight: 500;
+  background: linear-gradient(90deg, #118349, #6dc61e, #118349);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  transition: transform 0.3s ease, background 0.3s ease;
+  position: relative;
+  z-index: 2; /* keep text above reflection */
+}
+
+/* Hover effect for links: drop slightly */
+.dropdown-content a:hover {
+  transform: translateY(5px);
+}
+
+/* ===== Main Section Two-Column Layout ===== */
+.main-section {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0 2rem;
+  box-sizing: border-box;
+  text-align: left;
+}
+
+/* Container for text + model */
+.advocacy-container {
+  display: flex;
+  gap: 2rem;
+  flex-wrap: wrap;
+  align-items: center;
+  max-width: 1200px;
+  width: 100%;
+}
+
+/* Left column: text with subtle 3D tilt */
+.text-column {
+  flex: 1 1 400px;
+  transform: perspective(800px) rotateY(5deg);
+  transform-origin: left center;
+  text-align: justify;
+}
+
+/* Gradient text animation */
+.gradient-text {
+  background: linear-gradient(90deg, #118349, #6dc61e, #118349);
+  background-size: 200% 200%;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: gradientMove 3s ease infinite;
+}
+
+/* Right column: 3D model */
+.model-column {
+  flex: 0 0 300px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Header inside left column */
+.advocacy-header {
+  font-size: 2rem;
+  font-weight: 700;
+  margin-bottom: 1.5rem;
+}
+
+/* Paragraph styling */
+.advocacy-paragraph {
+  font-size: 1.1rem;
+  line-height: 1.8;
+  color: #ccc;
+}
+
+/* 3D model size */
+model-viewer {
+  width: 100%;
+  height: auto;
+}
+
+/* Enable smooth transitions for parallax movement */
+.text-column,
+.model-column {
+  transition: transform 0.2s ease-out;
+}
+
+/* Sticky footer styling */
+footer {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  text-align: right;
+  padding: 10px 0;
+  color: rgba(255, 255, 255, 0.338);
+  font-size: 0.9rem;
+  z-index: 1000;
+}

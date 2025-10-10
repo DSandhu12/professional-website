@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Education Page</title>
+
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+  <link rel="stylesheet" href="education.css">
+
+  <script type="module" src="https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js"></script>
+</head>
+<body>
+
+  <!-- Transparent Navbar -->
+<nav class="navbar">
+  <div class="nav-left">
+    <h1 class="nav-logo">Education Page</h1>
+  </div>
+  <div class="nav-right">
+    <a href="index.html" class="nav-link">Home</a>
+
+    <div class="dropdown">
+      <a href="#" class="nav-link dropdown-toggle">About Me</a>
+      <div class="dropdown-content">
+        <a href="advocacy.html">Advocacy</a>
+        <a href="#">Education</a>
+        <a href="skills.html">Skills / Techstack</a>
+      </div>
+    </div>
+
+    <div class="dropdown">
+      <a href="#" class="nav-link dropdown-toggle">Achievements</a>
+      <div class="dropdown-content">
+        <a href="experience.html">Experience</a>
+        <a href="certification.html">Certifications and Training</a>
+      </div>
+    </div>
+
+    <a href="portfolio.html" class="nav-link">Portfolio</a>
+    <a href="contact.html" class="nav-link">Contact</a>
+  </div>
+</nav>
+
+  <!-- Main Content -->
+  <section class="main-section container">
+    <div class="row align-items-center">
+      <!-- Right Column: Header + Paragraph -->
+      <div class="education-header">
+        <model-viewer 
+            src="images/graduation_hat.glb" 
+            alt="3D Graduation Hat" 
+            auto-rotate 
+            camera-controls 
+            disable-zoom>
+        </model-viewer>
+
+        <div class="text-perspective parallax-container">
+          <div class="text-container">
+            <span class="white-text">My</span> 
+            <span class="gradient-text">EDUCATION</span>
+            <span class="education-subheader">My journey throughout my schooling life which made the person I am</span>
+          </div>
+        </div>
+      </div>
+      <i class="bi bi-chevron-down"></i>
+    </div>
+  </section>
+
+<!-- Education / Experience Section -->
+<section class="five-rows-section container">
+
+  <!-- Row 1 -->
+  <div class="glass-card">
+    <div class="col-12">
+      <h3 class="row-date">Aug 2022 - Oct 2026</h3>
+      <div class="row-header">
+        <img src="images/tech_logo.png" alt="FEU Logo" class="row-logo">
+        <h3 class="row-title">FEU INSTITUTE OF TECHNOLOGY - MANILA</h3>
+      </div>
+      <p class="row-paragraph">
+        Bachelor of Science - BS, Computer Science with specialization in Software Engineering<br><br>
+        Grade: 3.87<br>
+        Activities and societies: ACM, JPCS<br>
+        Consistent Dean's Gold Certificate Awardee (2022-2026) — Given to students with annual GPA of 3.80 and above.
+      </p>
+    </div>
+  </div>
+
+<!-- Row 2 -->
+<div class="glass-card">
+  <div class="col-12">
+    <h3 class="row-title">HONORS AND DISTINCTIONS:</h3>
+    <div class="row-break"></div>
+    <img src="images/third_placer.png" alt="3rd Overall" class="row-img">
+    <p class="row-paragraph text-center">
+      Ranked 3rd Overall among Computer Science students, FEU Institute of Technology — A.Y. 2024–2025 (GPA: 3.90)
+    </p>
+    <div class="row-break"></div>
+
+    <img src="images/second_placer.png" alt="2nd Overall" class="row-img">
+    <p class="row-paragraph text-center">
+      Ranked 2nd Overall among Computer Science students, FEU Institute of Technology — A.Y. 2023–2024 (GPA: 3.85)
+    </p>
+    <div class="row-break"></div>
+
+    <img src="images/another_third_placer.png" alt="3rd Overall" class="row-img">
+    <p class="row-paragraph text-center">
+      Ranked 3rd Overall among Computer Science students, FEU Institute of Technology — A.Y. 2022–2023 (GPA: 3.85)
+    </p>
+  </div>
+</div>
+
+  <!-- Row 3 -->
+  <div class="glass-card">
+    <div class="col-12">
+      <h3 class="row-date">July 2020 - July 2022</h3>
+      <div class="row-header">
+        <img src="images/sanbeda_icon.svg" alt="San Beda Logo" class="row-logo">
+        <h3 class="row-title">SAN BEDA UNIVERSITY - RIZAL</h3>
+      </div>
+      <p class="row-paragraph">
+        Senior High School — Science, Technology, Engineering, and Mathematics (STEM) Strand
+      </p>
+      <img src="images/beda_image.png" alt="Award" class="row-img">
+      <p class="row-paragraph">
+        Graduated Top 7 of the batch out of 300+ students<br>
+        Received recognition for Outstanding Thesis on combating fake news through a website prototype and awareness campaign<br>
+        Participated in academic initiatives promoting digital literacy and critical thinking
+      </p>
+    </div>
+  </div>
+</section>
+
+  <script src="main.js" defer></script>
+</body>
+</html>
