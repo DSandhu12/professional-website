@@ -1,61 +1,147 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>IN PROGRESS!</title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>My Project Portfolio</title>
 
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
-  <link rel="stylesheet" href="index.css">
+  <link rel="stylesheet" href="experience.css"> <!-- shared glass-card styles -->
+  <link rel="stylesheet" href="portfolio.css">
+</head>
+<body class="portfolio-page">
 
-  
-  </head>
-<body>
-
-<!-- Transparent Navbar -->
+<!-- Transparent Navbar (no burger) -->
 <nav class="navbar">
   <div class="nav-left">
-    <h1 class="nav-logo">Portfolio Page</h1>
+    <a class="nav-logo" href="index.html">Portfolio Page</a>
   </div>
   <div class="nav-right">
     <a href="index.html" class="nav-link">Home</a>
 
     <div class="dropdown">
-      <a href="#" class="nav-link dropdown-toggle">About Me</a>
+      <a class="nav-link dropdown-toggle" href="#">About Me</a>
       <div class="dropdown-content">
         <a href="advocacy.html">Advocacy</a>
         <a href="education.html">Education</a>
-        <a href="skills.html">Techstack and Skills</a>
+        <a href="skills.html">Techstack &amp; Skills</a>
       </div>
     </div>
 
     <div class="dropdown">
-      <a href="#" class="nav-link dropdown-toggle">Achievements</a>
+      <a class="nav-link dropdown-toggle" href="#">Achievements</a>
       <div class="dropdown-content">
         <a href="experience.html">Experience</a>
-        <a href="certification.html">Certifications and Training</a>
+        <a href="certification.html">Certifications &amp; Training</a>
       </div>
     </div>
 
-    <a href="#" class="nav-link">Portfolio</a>
+    <a href="portfolio.html" class="nav-link">Portfolio</a>
     <a href="contact.html" class="nav-link">Contact</a>
   </div>
 </nav>
 
+<!-- HERO: left 3D model (like experience page) + right text -->
+<section class="main-section container" style="padding-top:4.5rem;">
+  <div class="row align-items-center five-rows-section" style="max-width:1200px;margin:0 auto;">
 
-<!-- Main Content -->
-<section class="main-section container">
-  <div class="row">
-    
-    <!-- Text Column -->
-    <div class="col-12 text-column text-start">
-      <h2 class="greetings mb-3">
-        <span class="white-text" style="font-size: 8rem; display: block; text-align: center;">
-        Work in progress!
-      </span>
-      </h2>
+    <!-- Left: 3D model (or image) -->
+    <div class="col-lg-5 col-md-6 text-center">
+      <!-- reuse your gold_star.glb model viewer (same as experience page) -->
+      <model-viewer 
+        src="images/projectfolder.png" 
+        alt="3D Star" 
+        auto-rotate 
+        camera-controls 
+        disable-zoom
+        style="width:100%;max-width:420px;height:auto;">
+      </model-viewer>
+    </div>
+
+    <!-- Right: Title + subtitle -->
+    <div class="col-lg-7 col-md-6 text-start">
+      <div class="experience-header">
+        <div class="text-perspective">
+          <div class="text-container" style="transform:none;">
+            <span class="gradient-text" style="font-size:3.25rem;display:block;">MY PROJECT PORTFOLIO</span>
+            <span class="experience-subheader" style="font-size:1.1rem;margin-top:0.8rem;color:#cfcfcf;">
+              Selected IT projects — click a card for a dedicated page with details, demo links, and setup instructions.
+            </span>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
-  <script src="main.js" defer></script>
+</section>
+
+<!-- PROJECTS: stacked top-to-bottom -->
+<section class="five-rows-section container" style="max-width:1000px;">
+
+  <!-- TRASHSCAN (top) -->
+  <div class="glass-card project-card">
+    <div class="row align-items-center">
+      <div class="col-md-4 text-center">
+        <img src="images/thesis_image.png" alt="TrashScan Preview" class="row-img" style="max-height:200px;">
+      </div>
+
+      <div class="col-md-8">
+        <h3 class="row-date">Jan 2025 - Present</h3>
+        <div class="row-header">
+          <h3 class="row-title">TrashScan: Surveillance-Powered Litter Detection</h3>
+        </div>
+        <p class="row-paragraph">
+          AI-powered surveillance system using YOLOv8 for real-time litter detection, multi-camera monitoring, hotspot analytics, and SMS notifications.
+        </p>
+        <a class="project-link" href="portfolio_trashscan.html">Open TrashScan</a>
+        <a class="project-link" href="https://trashscan.vercel.app" target="_blank" rel="noopener" style="margin-left:.6rem;">Live demo</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- SARI (middle) -->
+  <div class="glass-card project-card">
+    <div class="row align-items-center">
+      <div class="col-md-4 text-center">
+        <img src="images/sari.png" alt="SARI Preview" class="row-img" style="max-height:200px;">
+      </div>
+
+      <div class="col-md-8">
+        <h3 class="row-date">(Web Project)</h3>
+        <div class="row-header">
+          <h3 class="row-title">SARI: Point-of-Sale &amp; Inventory System</h3>
+        </div>
+        <p class="row-paragraph">
+          A POS + inventory platform for sari-sari stores — cashier POS, inventory tracking, sales reports, and audit logs.
+        </p>
+        <a class="project-link" href="projects/sari.html">Open SARI</a>
+        <a class="project-link" href="https://sari.great-site.net/" target="_blank" rel="noopener" style="margin-left:.6rem;">Live demo</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- QUIZFLASH (bottom) -->
+  <div class="glass-card project-card">
+    <div class="row align-items-center">
+      <div class="col-md-4 text-center">
+        <img src="images/quizflash.png" alt="QuizFlash Preview" class="row-img" style="max-height:200px;">
+      </div>
+
+      <div class="col-md-8">
+        <h3 class="row-date">(Desktop App)</h3>
+        <div class="row-header">
+          <h3 class="row-title">QuizFlash: Digital Flashcard Manager</h3>
+        </div>
+        <p class="row-paragraph">
+          Java + Swing desktop app for creating, editing, and studying flashcards stored as plain text. Supports themes and import/export.
+        </p>
+        <a class="project-link" href="projects/quizflash.html">Open QuizFlash</a>
+        <a class="project-link" href="#" data-action="external-download" style="margin-left:.6rem;">Download</a>
+      </div>
+    </div>
+  </div>
+
+</section>
+
+<script src="main.js" defer></script>
 </body>
 </html>
