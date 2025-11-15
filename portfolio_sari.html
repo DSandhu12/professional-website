@@ -72,21 +72,29 @@
     .nav-tabs .nav-link {
       background: rgba(255, 255, 255, 0.05);
       border: 1px solid rgba(255, 255, 255, 0.1);
-      color: #ccc;
+      color: #fff !important;
       border-radius: 8px;
       padding: 0.6rem 1.2rem;
       transition: all 0.3s ease;
+      font-weight: 500;
+      text-decoration: none;
+      -webkit-background-clip: unset !important;
+      -webkit-text-fill-color: unset !important;
+      background-clip: unset !important;
     }
     
     .nav-tabs .nav-link:hover {
       background: rgba(17, 131, 73, 0.2);
-      color: var(--secondary-color);
+      color: #fff !important;
+      transform: translateY(-2px);
     }
     
     .nav-tabs .nav-link.active {
       background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
-      color: #fff;
+      color: #fff !important;
       border-color: var(--secondary-color);
+      font-weight: 600;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
     }
     
     .section-card {
@@ -156,22 +164,55 @@
       margin-bottom: 0.5rem;
     }
     
-    .back-button {
-      display: inline-block;
-      margin-top: 2rem;
-      padding: 0.8rem 1.5rem;
-      background: rgba(255, 255, 255, 0.1);
+.back-button {
+  display: inline-block;
+  margin-top: 2rem;
+  margin-bottom: 50vh; /* Added this for scroll space */
+  padding: 0.8rem 1.5rem;
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 12px;
+  color: #fff;
+  text-decoration: none;
+  transition: all 0.3s ease;
+}
+
+.back-button:hover {
+  background: rgba(255, 255, 255, 0.15);
+  color: var(--secondary-color);
+  transform: translateY(-2px);
+}
+
+    /* Sticky Back Button */
+    .sticky-back-button {
+      position: fixed;
+      top: 50%;
+      left: 20px;
+      transform: translateY(-50%);
+      z-index: 100;
+      padding: 0.8rem 1.2rem;
+      background: rgba(0, 0, 0, 0.9);
+      backdrop-filter: blur(20px);
       border: 1px solid rgba(255, 255, 255, 0.2);
       border-radius: 12px;
       color: #fff;
       text-decoration: none;
       transition: all 0.3s ease;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
     }
-    
-    .back-button:hover {
-      background: rgba(255, 255, 255, 0.15);
+
+    .sticky-back-button:hover {
+      background: rgba(17, 131, 73, 0.3);
       color: var(--secondary-color);
-      transform: translateY(-2px);
+      transform: translateY(-50%) translateX(-5px);
+    }
+
+    @media (max-width: 768px) {
+      .sticky-back-button {
+        left: 10px;
+        padding: 0.6rem 1rem;
+        font-size: 0.9rem;
+      }
     }
     
     .external-link {
@@ -183,27 +224,12 @@
     .external-link:hover {
       text-decoration: underline;
     }
-
-    .video-container {
-      position: relative;
-      padding-bottom: 56.25%;
-      height: 0;
-      overflow: hidden;
-      border-radius: 20px;
-      margin: 2rem 0;
-    }
-
-    .video-container iframe {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      border: none;
-    }
   </style>
 </head>
 <body>
+
+<!-- Sticky Back Button -->
+<a href="portfolio.html" class="sticky-back-button">← Back to Portfolio</a>
 
 <!-- Navbar -->
 <nav class="navbar">
@@ -256,9 +282,6 @@
       </li>
       <li class="nav-item">
         <a class="nav-link" href="#my-role">My Role</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="#demo">Demo</a>
       </li>
       <li class="nav-item">
         <a class="nav-link" href="#links">Links</a>
@@ -367,20 +390,6 @@
     </ul>
   </div>
 
-  <!-- Demo Video -->
-  <div id="demo" class="section-card">
-    <h2 class="section-title">🎥 Video Demonstration</h2>
-    <p style="color: #ccc; margin-bottom: 1rem;">
-      Watch a complete walkthrough of SARI's features and functionality:
-    </p>
-    <div class="video-container">
-      <iframe src="https://www.youtube.com/embed/h1Kc-AwdSus" 
-              allowfullscreen
-              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture">
-      </iframe>
-    </div>
-  </div>
-
   <!-- Links -->
   <div id="links" class="section-card">
     <h2 class="section-title">🔗 Project Links</h2>
@@ -391,17 +400,14 @@
     </p>
   </div>
 
-  <a href="../portfolio.html" class="back-button">← Back to Portfolio</a>
-</section>
-
 <script>
   // Smooth scroll for navigation tabs
-  document.querySelectorAll('.nav-link').forEach(link => {
+  document.querySelectorAll('.nav-tabs .nav-link').forEach(link => {
     link.addEventListener('click', function(e) {
       e.preventDefault();
       
-      // Remove active class from all links
-      document.querySelectorAll('.nav-link').forEach(l => l.classList.remove('active'));
+      // Remove active class from all tab links
+      document.querySelectorAll('.nav-tabs .nav-link').forEach(l => l.classList.remove('active'));
       
       // Add active class to clicked link
       this.classList.add('active');
@@ -415,27 +421,58 @@
     });
   });
 
-  // Update active tab on scroll
+  // Update active tab on scroll - ROBUST VERSION
   const sections = document.querySelectorAll('.section-card');
-  const navLinks = document.querySelectorAll('.nav-link');
+  const navLinks = document.querySelectorAll('.nav-tabs .nav-link');
 
-  window.addEventListener('scroll', () => {
+  function updateActiveTab() {
+    const scrollPosition = window.scrollY + 250;
+    const windowHeight = window.innerHeight;
+    const documentHeight = document.documentElement.scrollHeight;
+    
     let current = '';
-    sections.forEach(section => {
-      const sectionTop = section.offsetTop;
-      const sectionHeight = section.clientHeight;
-      if (scrollY >= (sectionTop - 200)) {
-        current = section.getAttribute('id');
+    
+    // Check if scrolled to bottom (within 50px)
+    if (window.scrollY + windowHeight >= documentHeight - 50) {
+      // Activate last section when at bottom
+      if (sections.length > 0) {
+        current = sections[sections.length - 1].getAttribute('id');
       }
-    });
+    } else {
+      // Normal scroll detection
+      sections.forEach((section, index) => {
+        const sectionTop = section.offsetTop;
+        const sectionHeight = section.clientHeight;
+        const sectionBottom = sectionTop + sectionHeight;
+        
+        // For the last section, be more lenient
+        if (index === sections.length - 1) {
+          if (scrollPosition >= sectionTop) {
+            current = section.getAttribute('id');
+          }
+        } else {
+          // Normal detection for other sections
+          if (scrollPosition >= sectionTop && scrollPosition < sectionBottom) {
+            current = section.getAttribute('id');
+          }
+        }
+      });
+    }
 
+    // Update active states
     navLinks.forEach(link => {
       link.classList.remove('active');
       if (link.getAttribute('href') === `#${current}`) {
         link.classList.add('active');
       }
     });
-  });
+  }
+
+  // Run on scroll
+  window.addEventListener('scroll', updateActiveTab);
+  
+  // Run on load to set initial state
+  window.addEventListener('load', updateActiveTab);
 </script>
 
 <script src="../main.js" defer></script>
