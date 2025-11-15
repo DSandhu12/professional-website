@@ -133,6 +133,7 @@ body {
 .main-section {
   min-height: 100vh;
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
   text-align: center;
@@ -140,19 +141,25 @@ body {
   box-sizing: border-box;
 }
 
-/* ===================== PORTFOLIO HEADER ===================== */
-.portfolio-header {
-  text-align: center;
-  margin-bottom: 3rem;
+/* ===================== PORTFOLIO HEADER (copied tilt behavior) ===================== */
+/* text-perspective & text-container are used to produce the 3D tilt like the experience page */
+.text-perspective {
+  perspective: 800px;
 }
 
-.header-title {
-  font-size: 3rem;
-  font-weight: 700;
-  margin-bottom: 1rem;
+.text-container {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  transform: rotateY(-25deg); /* tilt applied (same as experience) */
+  transform-origin: left center;
+  transition: transform 0.3s ease;
 }
 
+/* header/gradient styles for portfolio title (WHITE gradient per request) */
 .gradient-text {
+  font-size: 2.2rem;
+  font-weight: 700;
   background: linear-gradient(90deg, #ffffff, #eaeaea, #ffffff);
   background-size: 200% 200%;
   -webkit-background-clip: text;
@@ -160,43 +167,168 @@ body {
   animation: gradientMove 3s ease infinite;
 }
 
-.white-text {
-  color: #fff;
+/* ensure big header also uses white gradient visually (if you use .experience-header .gradient-text this will be applied) */
+.experience-header .gradient-text {
+  font-size: 3rem;
+  background: linear-gradient(90deg, #ffffff, #eaeaea, #ffffff);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: gradientMove 3s ease infinite;
 }
 
-.header-subtitle {
-  font-size: 1.2rem;
+/* small supporting text */
+.experience-subheader {
+  display: block;
+  font-size: 1.5rem;
+  font-weight: 400;
   color: #ccc;
-  max-width: 800px;
-  margin: 0 auto;
+  margin-top: 0.5rem;
+  text-align: left;
 }
 
-/* ===================== PROJECT GRID ===================== */
-.projects-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-  gap: 2rem;
+/* 3D model size (kept same as experience) */
+model-viewer {
+  width: 600px;
+  height: 600px;
+}
+
+/* ===================== GLASS CARD SECTION ===================== */
+.five-rows-section {
+  padding: 4rem 2rem;
   max-width: 1200px;
   margin: 0 auto;
-  padding: 0 2rem;
 }
 
-/* ===================== PROJECT CARD ===================== */
-.project-card {
+/* GLASS CARD */
+.glass-card {
+  margin-bottom: 3rem;
+  padding: 2rem;
+  border-radius: 20px;
   background: rgba(255, 255, 255, 0.06);
   backdrop-filter: blur(28px);
   -webkit-backdrop-filter: blur(28px);
-  border-radius: 20px;
   border: 1px solid rgba(255, 255, 255, 0.12);
-  box-shadow: 0 12px 48px rgba(0, 0, 0, 0.25), inset 0 0 12px rgba(255, 255, 255, 0.05);
+  box-shadow:
+    0 12px 48px rgba(0, 0, 0, 0.25),
+    inset 0 0 12px rgba(255, 255, 255, 0.05);
+  position: relative;
   overflow: hidden;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
-  position: relative;
+  word-wrap: break-word;
+  transform: perspective(1000px) rotateY(5deg);
 }
 
-.project-card:hover {
-  transform: translateY(-8px);
-  box-shadow: 0 16px 56px rgba(0, 0, 0, 0.35), inset 0 0 16px rgba(255, 255, 255, 0.08);
+/* Alternate angle for every other card */
+.glass-card:nth-child(even) {
+  transform: perspective(1000px) rotateY(-5deg);
+}
+
+/* Reflection effect overlay */
+.glass-card::after {
+  content: "";
+  position: absolute;
+  top: var(--reflection-y, 50%);
+  left: var(--reflection-x, 50%);
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(circle at center, rgba(255,255,255,0.2) 0%, rgba(255,255,255,0) 50%);
+  pointer-events: none;
+  transform: translate(-50%, -50%);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  z-index: 1;
+}
+
+.glass-card:hover::after {
+  opacity: 1;
+}
+
+.glass-card:hover {
+  transform: perspective(1000px) rotateY(5deg) translateY(-6px);
+  box-shadow:
+    0 16px 56px rgba(0, 0, 0, 0.35),
+    inset 0 0 16px rgba(255, 255, 255, 0.08);
+}
+
+/* Maintain angle on hover for even cards */
+.glass-card:nth-child(even):hover {
+  transform: perspective(1000px) rotateY(-5deg) translateY(-6px);
+}
+
+/* Ensure content stays above reflection */
+.glass-card > * {
+  position: relative;
+  z-index: 2;
+}
+
+/* ROW HEADER */
+.row-header {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  margin-bottom: 1rem;
+  flex-wrap: wrap;
+}
+
+.row-logo {
+  width: 80px;
+  height: 80px;
+  object-fit: contain;
+  flex-shrink: 0;
+}
+
+.row-title {
+  font-size: 2rem;
+  font-weight: 700;
+  /* project card titles use white gradient */
+  background: linear-gradient(90deg, #ffffff, #eaeaea, #ffffff);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  margin-bottom: 0.5rem;
+  word-break: break-word;
+}
+
+.row-date {
+  text-align: left;
+  font-size: 1.1rem;
+  font-weight: 500;
+  /* date uses a subtler white gradient */
+  background: linear-gradient(90deg, #e9e9e9, #cfcfcf);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  margin-bottom: 1rem;
+}
+
+.row-paragraph {
+  font-size: 1rem;
+  color: #ccc;
+  line-height: 1.6;
+  margin-bottom: 1rem;
+}
+
+/* ROW IMAGES - iOS Glass Style */
+.row-img {
+  width: 100%;
+  height: auto;
+  border-radius: 20px;
+  object-fit: cover;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(10px);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.row-img:hover {
+  transform: scale(1.03);
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.15);
+}
+
+.row-break {
+  height: 2rem;
+}
+
+/* ===================== PROJECT / BUTTON styles ===================== */
+.project-card {
+  background: transparent; /* already handled by glass-card */
 }
 
 .project-image {
@@ -260,15 +392,7 @@ body {
 }
 
 /* ===================== EXPERIENCE SECTION (merged) ===================== */
-.experience-header .gradient-text,
-.row-title,
-.row-date {
-  background: linear-gradient(90deg, #ffffff, #eaeaea, #ffffff);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  animation: gradientMove 3s ease infinite;
-}
-
+/* kept for compatibility with design shared from experience.css */
 .experience-card {
   background: rgba(255, 255, 255, 0.06);
   backdrop-filter: blur(28px);
@@ -298,5 +422,16 @@ body {
 
   .project-card {
     margin-bottom: 1rem;
+  }
+
+  /* reduce tilt on small screens for readability */
+  .text-container {
+    transform: rotateY(0);
+    align-items: flex-start;
+  }
+
+  model-viewer {
+    width: 100%;
+    height: auto;
   }
 }
