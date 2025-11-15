@@ -1,0 +1,443 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SARI Project</title>
+
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="../portfolio.css">
+  <style>
+    /* SARI Green Theme */
+    :root {
+      --primary-color: #118349;
+      --secondary-color: #6dc61e;
+    }
+
+    .project-detail-section {
+      max-width: 1000px;
+      margin: 0 auto;
+      padding: 8rem 2rem 4rem;
+    }
+    
+    .detail-header {
+      text-align: center;
+      margin-bottom: 3rem;
+    }
+    
+    .detail-title {
+      font-size: 2.5rem;
+      font-weight: 700;
+      background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      margin-bottom: 1rem;
+    }
+    
+    .detail-tagline {
+      font-size: 1.3rem;
+      color: var(--secondary-color);
+      font-style: italic;
+      margin-bottom: 2rem;
+    }
+    
+    .detail-image {
+      width: 100%;
+      border-radius: 20px;
+      margin: 2rem 0;
+      box-shadow: 0 12px 48px rgba(0, 0, 0, 0.3);
+    }
+    
+    /* Sticky Navigation */
+    .sticky-nav {
+      position: sticky;
+      top: 80px;
+      background: rgba(0, 0, 0, 0.95);
+      backdrop-filter: blur(20px);
+      z-index: 50;
+      padding: 1rem 0;
+      margin-bottom: 2rem;
+      border-radius: 12px;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+    
+    .nav-tabs {
+      border: none;
+      display: flex;
+      gap: 0.5rem;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+    
+    .nav-tabs .nav-link {
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      color: #ccc;
+      border-radius: 8px;
+      padding: 0.6rem 1.2rem;
+      transition: all 0.3s ease;
+    }
+    
+    .nav-tabs .nav-link:hover {
+      background: rgba(17, 131, 73, 0.2);
+      color: var(--secondary-color);
+    }
+    
+    .nav-tabs .nav-link.active {
+      background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
+      color: #fff;
+      border-color: var(--secondary-color);
+    }
+    
+    .section-card {
+      background: rgba(255, 255, 255, 0.06);
+      backdrop-filter: blur(28px);
+      border-radius: 20px;
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      padding: 2rem;
+      margin-bottom: 2rem;
+      scroll-margin-top: 150px;
+    }
+    
+    .section-title {
+      font-size: 1.8rem;
+      font-weight: 600;
+      color: var(--secondary-color);
+      margin-bottom: 1.5rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    
+    .feature-list {
+      list-style: none;
+      padding: 0;
+    }
+    
+    .feature-list li {
+      padding: 0.8rem 0;
+      padding-left: 2rem;
+      position: relative;
+      color: #ccc;
+      line-height: 1.6;
+    }
+    
+    .feature-list li::before {
+      content: "✓";
+      position: absolute;
+      left: 0;
+      color: var(--secondary-color);
+      font-weight: bold;
+      font-size: 1.2rem;
+    }
+
+    .feature-list li strong {
+      color: #fff;
+    }
+    
+    .tech-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+      gap: 1rem;
+      margin-top: 1rem;
+    }
+    
+    .tech-item {
+      background: rgba(17, 131, 73, 0.1);
+      border: 1px solid rgba(17, 131, 73, 0.3);
+      border-radius: 12px;
+      padding: 1rem;
+      text-align: center;
+    }
+    
+    .tech-item strong {
+      color: var(--secondary-color);
+      display: block;
+      margin-bottom: 0.5rem;
+    }
+    
+    .back-button {
+      display: inline-block;
+      margin-top: 2rem;
+      padding: 0.8rem 1.5rem;
+      background: rgba(255, 255, 255, 0.1);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      border-radius: 12px;
+      color: #fff;
+      text-decoration: none;
+      transition: all 0.3s ease;
+    }
+    
+    .back-button:hover {
+      background: rgba(255, 255, 255, 0.15);
+      color: var(--secondary-color);
+      transform: translateY(-2px);
+    }
+    
+    .external-link {
+      color: var(--secondary-color);
+      text-decoration: none;
+      font-weight: 600;
+    }
+    
+    .external-link:hover {
+      text-decoration: underline;
+    }
+
+    .video-container {
+      position: relative;
+      padding-bottom: 56.25%;
+      height: 0;
+      overflow: hidden;
+      border-radius: 20px;
+      margin: 2rem 0;
+    }
+
+    .video-container iframe {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      border: none;
+    }
+  </style>
+</head>
+<body>
+
+<!-- Navbar -->
+<nav class="navbar">
+  <div class="nav-left">
+    <h1 class="nav-logo" style="background: linear-gradient(90deg, #118349, #6dc61e, #118349); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">SARI Project</h1>
+  </div>
+  <div class="nav-right">
+    <a href="../index.html" class="nav-link">Home</a>
+    <div class="dropdown">
+      <a href="#" class="nav-link dropdown-toggle">About Me</a>
+      <div class="dropdown-content">
+        <a href="../advocacy.html">Advocacy</a>
+        <a href="../education.html">Education</a>
+        <a href="../skills.html">Techstack and Skills</a>
+      </div>
+    </div>
+    <div class="dropdown">
+      <a href="#" class="nav-link dropdown-toggle">Achievements</a>
+      <div class="dropdown-content">
+        <a href="../experience.html">Experience</a>
+        <a href="../certification.html">Certifications and Training</a>
+      </div>
+    </div>
+    <a href="../portfolio.html" class="nav-link">Portfolio</a>
+    <a href="../contact.html" class="nav-link">Contact</a>
+  </div>
+</nav>
+
+<!-- Project Details -->
+<section class="project-detail-section">
+  <div class="detail-header">
+    <h1 class="detail-title">SARI: Point of Sale & Inventory System</h1>
+    <p class="detail-tagline">"Streamline Your Store, Maximize Your Success!"</p>
+    <p style="color: #ccc;">July 2024 - Present</p>
+  </div>
+
+  <img src="../images/sari.png" alt="SARI Homepage" class="detail-image">
+
+  <!-- Sticky Navigation Tabs -->
+  <div class="sticky-nav">
+    <ul class="nav nav-tabs">
+      <li class="nav-item">
+        <a class="nav-link active" href="#overview">Overview</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#features">Features</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#tech-stack">Tech Stack</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#my-role">My Role</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#demo">Demo</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#links">Links</a>
+      </li>
+    </ul>
+  </div>
+
+  <!-- Project Overview -->
+  <div id="overview" class="section-card">
+    <h2 class="section-title">📋 Project Overview</h2>
+    <p style="color: #ccc; line-height: 1.8;">
+      SARI is a powerful web-based Point of Sale and Inventory Management System specifically designed for micro, 
+      small, and medium enterprises (MSMEs), particularly sari-sari stores in the Philippines. The platform streamlines 
+      sales transactions, stock management, and financial record-keeping with an intuitive interface that empowers 
+      small business owners to take control of their operations.
+      <br><br>
+      Built with robust validation, sanitation, and database operations, SARI provides enterprise-level features 
+      in a package accessible to small retailers. The system includes role-based access control, real-time inventory 
+      tracking, comprehensive reporting, and audit logging—all critical features for modern retail management.
+    </p>
+  </div>
+
+  <!-- Key Features -->
+  <div id="features" class="section-card">
+    <h2 class="section-title">🌟 Key Features</h2>
+    
+    <h4 style="color: var(--secondary-color); margin-top: 1.5rem;">🔐 Authentication & Security</h4>
+    <ul class="feature-list">
+      <li><strong>Secure Login:</strong> Advanced password hashing and session management</li>
+      <li><strong>Role-Based Access:</strong> Administrator and Cashier privilege levels</li>
+      <li><strong>Account Management:</strong> Create, modify, and remove user accounts with proper validation</li>
+    </ul>
+
+    <h4 style="color: var(--secondary-color); margin-top: 1.5rem;">📊 Dashboard & Analytics</h4>
+    <ul class="feature-list">
+      <li><strong>Financial Overview:</strong> Monitor daily, monthly, and annual earnings</li>
+      <li><strong>User Management:</strong> Track total cashier accounts and activity</li>
+      <li><strong>Projections:</strong> Customizable financial forecasting graph</li>
+      <li><strong>Quick Access:</strong> Centralized hub for all key metrics</li>
+    </ul>
+
+    <h4 style="color: var(--secondary-color); margin-top: 1.5rem;">🛒 Point of Sale</h4>
+    <ul class="feature-list">
+      <li><strong>Product Lookup:</strong> Fast search and selection from inventory</li>
+      <li><strong>Real-Time Stock:</strong> Automatic inventory adjustments on sale</li>
+      <li><strong>Digital Receipts:</strong> Generate professional transaction records</li>
+      <li><strong>Streamlined Checkout:</strong> Intuitive interface for quick transactions</li>
+    </ul>
+
+    <h4 style="color: var(--secondary-color); margin-top: 1.5rem;">📦 Inventory Management</h4>
+    <ul class="feature-list">
+      <li><strong>Product Database:</strong> Comprehensive tracking of all inventory items</li>
+      <li><strong>Stock Movements:</strong> Monitor items in and out of inventory</li>
+      <li><strong>Product Details:</strong> Track codes, quantities, prices, and metadata</li>
+      <li><strong>CRUD Operations:</strong> Add, update, and remove products seamlessly</li>
+    </ul>
+
+    <h4 style="color: var(--secondary-color); margin-top: 1.5rem;">📈 Reports & Audit</h4>
+    <ul class="feature-list">
+      <li><strong>Sales Reports:</strong> Detailed financial performance analysis</li>
+      <li><strong>Transaction History:</strong> Complete record of all sales by user</li>
+      <li><strong>Activity Logs:</strong> Track login/logout events and inventory changes</li>
+      <li><strong>Compliance Ready:</strong> Audit trails for transparency and regulatory needs</li>
+    </ul>
+  </div>
+
+  <!-- Tech Stack -->
+  <div id="tech-stack" class="section-card">
+    <h2 class="section-title">🛠️ Technology Stack</h2>
+    <div class="tech-grid">
+      <div class="tech-item">
+        <strong>Frontend</strong>
+        <p style="color: #ccc; margin: 0;">HTML, CSS, JavaScript</p>
+      </div>
+      <div class="tech-item">
+        <strong>Backend</strong>
+        <p style="color: #ccc; margin: 0;">PHP</p>
+      </div>
+      <div class="tech-item">
+        <strong>Database</strong>
+        <p style="color: #ccc; margin: 0;">MySQL</p>
+      </div>
+      <div class="tech-item">
+        <strong>Security</strong>
+        <p style="color: #ccc; margin: 0;">Password Hashing, Session Management</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- My Role -->
+  <div id="my-role" class="section-card">
+    <h2 class="section-title">👨‍💻 My Role</h2>
+    <p style="color: #ccc; line-height: 1.8;">
+      <strong style="color: #fff;">Full-Stack Developer & System Architect</strong><br><br>
+      As a core developer on the SARI project, I contributed to the entire development lifecycle:
+    </p>
+    <ul class="feature-list">
+      <li>Designed and implemented the database schema for efficient data storage and retrieval</li>
+      <li>Developed secure authentication system with password hashing and session management</li>
+      <li>Built role-based access control (RBAC) system for administrators and cashiers</li>
+      <li>Created responsive UI components for the dashboard, POS, and inventory modules</li>
+      <li>Implemented real-time inventory tracking and automatic stock adjustments</li>
+      <li>Developed sales reporting and analytics features with data visualization</li>
+      <li>Integrated comprehensive input validation and SQL injection prevention</li>
+      <li>Tested and debugged across different browsers and devices for consistency</li>
+    </ul>
+  </div>
+
+  <!-- Demo Video -->
+  <div id="demo" class="section-card">
+    <h2 class="section-title">🎥 Video Demonstration</h2>
+    <p style="color: #ccc; margin-bottom: 1rem;">
+      Watch a complete walkthrough of SARI's features and functionality:
+    </p>
+    <div class="video-container">
+      <iframe src="https://www.youtube.com/embed/h1Kc-AwdSus" 
+              allowfullscreen
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture">
+      </iframe>
+    </div>
+  </div>
+
+  <!-- Links -->
+  <div id="links" class="section-card">
+    <h2 class="section-title">🔗 Project Links</h2>
+    <p style="color: #ccc;">
+      <strong>Live Demo:</strong> <a href="https://sari.great-site.net/" class="external-link" target="_blank">sari.great-site.net</a><br>
+      <strong>Demo Video:</strong> <a href="https://youtu.be/h1Kc-AwdSus" class="external-link" target="_blank">YouTube Demo</a><br>
+      <strong>Team:</strong> Moral, Paglinawan, Quintano, and Sandhu
+    </p>
+  </div>
+
+  <a href="../portfolio.html" class="back-button">← Back to Portfolio</a>
+</section>
+
+<script>
+  // Smooth scroll for navigation tabs
+  document.querySelectorAll('.nav-link').forEach(link => {
+    link.addEventListener('click', function(e) {
+      e.preventDefault();
+      
+      // Remove active class from all links
+      document.querySelectorAll('.nav-link').forEach(l => l.classList.remove('active'));
+      
+      // Add active class to clicked link
+      this.classList.add('active');
+      
+      // Scroll to section
+      const targetId = this.getAttribute('href');
+      const targetSection = document.querySelector(targetId);
+      if (targetSection) {
+        targetSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+    });
+  });
+
+  // Update active tab on scroll
+  const sections = document.querySelectorAll('.section-card');
+  const navLinks = document.querySelectorAll('.nav-link');
+
+  window.addEventListener('scroll', () => {
+    let current = '';
+    sections.forEach(section => {
+      const sectionTop = section.offsetTop;
+      const sectionHeight = section.clientHeight;
+      if (scrollY >= (sectionTop - 200)) {
+        current = section.getAttribute('id');
+      }
+    });
+
+    navLinks.forEach(link => {
+      link.classList.remove('active');
+      if (link.getAttribute('href') === `#${current}`) {
+        link.classList.add('active');
+      }
+    });
+  });
+</script>
+
+<script src="../main.js" defer></script>
+</body>
+</html>

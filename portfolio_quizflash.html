@@ -1,0 +1,470 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>QuizFlash Project</title>
+
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="../portfolio.css">
+  <style>
+    /* QuizFlash Orange Theme */
+    :root {
+      --primary-color: #f97316;
+      --secondary-color: #fb923c;
+    }
+
+    .project-detail-section {
+      max-width: 1000px;
+      margin: 0 auto;
+      padding: 8rem 2rem 4rem;
+    }
+    
+    .detail-header {
+      text-align: center;
+      margin-bottom: 3rem;
+    }
+    
+    .detail-title {
+      font-size: 2.5rem;
+      font-weight: 700;
+      background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      margin-bottom: 1rem;
+    }
+    
+    .detail-tagline {
+      font-size: 1.3rem;
+      color: var(--secondary-color);
+      font-style: italic;
+      margin-bottom: 2rem;
+    }
+    
+    .detail-image {
+      width: 100%;
+      border-radius: 20px;
+      margin: 2rem 0;
+      box-shadow: 0 12px 48px rgba(0, 0, 0, 0.3);
+    }
+    
+    /* Sticky Navigation */
+    .sticky-nav {
+      position: sticky;
+      top: 80px;
+      background: rgba(0, 0, 0, 0.95);
+      backdrop-filter: blur(20px);
+      z-index: 50;
+      padding: 1rem 0;
+      margin-bottom: 2rem;
+      border-radius: 12px;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+    
+    .nav-tabs {
+      border: none;
+      display: flex;
+      gap: 0.5rem;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+    
+    .nav-tabs .nav-link {
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      color: #ccc;
+      border-radius: 8px;
+      padding: 0.6rem 1.2rem;
+      transition: all 0.3s ease;
+    }
+    
+    .nav-tabs .nav-link:hover {
+      background: rgba(249, 115, 22, 0.2);
+      color: var(--secondary-color);
+    }
+    
+    .nav-tabs .nav-link.active {
+      background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
+      color: #fff;
+      border-color: var(--secondary-color);
+    }
+    
+    .section-card {
+      background: rgba(255, 255, 255, 0.06);
+      backdrop-filter: blur(28px);
+      border-radius: 20px;
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      padding: 2rem;
+      margin-bottom: 2rem;
+      scroll-margin-top: 150px;
+    }
+    
+    .section-title {
+      font-size: 1.8rem;
+      font-weight: 600;
+      color: var(--secondary-color);
+      margin-bottom: 1.5rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    
+    .feature-list {
+      list-style: none;
+      padding: 0;
+    }
+    
+    .feature-list li {
+      padding: 0.8rem 0;
+      padding-left: 2rem;
+      position: relative;
+      color: #ccc;
+      line-height: 1.6;
+    }
+    
+    .feature-list li::before {
+      content: "✓";
+      position: absolute;
+      left: 0;
+      color: var(--secondary-color);
+      font-weight: bold;
+      font-size: 1.2rem;
+    }
+
+    .feature-list li strong {
+      color: #fff;
+    }
+    
+    .tech-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+      gap: 1rem;
+      margin-top: 1rem;
+    }
+    
+    .tech-item {
+      background: rgba(249, 115, 22, 0.1);
+      border: 1px solid rgba(249, 115, 22, 0.3);
+      border-radius: 12px;
+      padding: 1rem;
+      text-align: center;
+    }
+    
+    .tech-item strong {
+      color: var(--secondary-color);
+      display: block;
+      margin-bottom: 0.5rem;
+    }
+    
+    .back-button {
+      display: inline-block;
+      margin-top: 2rem;
+      padding: 0.8rem 1.5rem;
+      background: rgba(255, 255, 255, 0.1);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      border-radius: 12px;
+      color: #fff;
+      text-decoration: none;
+      transition: all 0.3s ease;
+    }
+    
+    .back-button:hover {
+      background: rgba(255, 255, 255, 0.15);
+      color: var(--secondary-color);
+      transform: translateY(-2px);
+    }
+    
+    .external-link {
+      color: var(--secondary-color);
+      text-decoration: none;
+      font-weight: 600;
+    }
+    
+    .external-link:hover {
+      text-decoration: underline;
+    }
+
+    .screenshots-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 1.5rem;
+      margin-top: 1.5rem;
+    }
+
+    .screenshot-item {
+      text-align: center;
+    }
+
+    .screenshot-item img {
+      width: 100%;
+      border-radius: 12px;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+      margin-bottom: 0.5rem;
+    }
+
+    .screenshot-item p {
+      color: #ccc;
+      font-size: 0.9rem;
+      font-style: italic;
+    }
+  </style>
+</head>
+<body>
+
+<!-- Navbar -->
+<nav class="navbar">
+  <div class="nav-left">
+    <h1 class="nav-logo" style="background: linear-gradient(90deg, #f97316, #fb923c, #f97316); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">QuizFlash Project</h1>
+  </div>
+  <div class="nav-right">
+    <a href="../index.html" class="nav-link">Home</a>
+    <div class="dropdown">
+      <a href="#" class="nav-link dropdown-toggle">About Me</a>
+      <div class="dropdown-content">
+        <a href="../advocacy.html">Advocacy</a>
+        <a href="../education.html">Education</a>
+        <a href="../skills.html">Techstack and Skills</a>
+      </div>
+    </div>
+    <div class="dropdown">
+      <a href="#" class="nav-link dropdown-toggle">Achievements</a>
+      <div class="dropdown-content">
+        <a href="../experience.html">Experience</a>
+        <a href="../certification.html">Certifications and Training</a>
+      </div>
+    </div>
+    <a href="../portfolio.html" class="nav-link">Portfolio</a>
+    <a href="../contact.html" class="nav-link">Contact</a>
+  </div>
+</nav>
+
+<!-- Project Details -->
+<section class="project-detail-section">
+  <div class="detail-header">
+    <h1 class="detail-title">QuizFlash: Digital Flashcard Manager</h1>
+    <p class="detail-tagline">"Learn Smarter, Remember Better!"</p>
+    <p style="color: #ccc;">Academic Project (2023-2024)</p>
+  </div>
+
+  <img src="../images/quizflash.png" alt="QuizFlash Application" class="detail-image">
+
+  <!-- Sticky Navigation Tabs -->
+  <div class="sticky-nav">
+    <ul class="nav nav-tabs">
+      <li class="nav-item">
+        <a class="nav-link active" href="#overview">Overview</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#features">Features</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#tech-stack">Tech Stack</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#my-role">My Role</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#screenshots">Screenshots</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#download">Download</a>
+      </li>
+    </ul>
+  </div>
+
+  <!-- Project Overview -->
+  <div id="overview" class="section-card">
+    <h2 class="section-title">📋 Project Overview</h2>
+    <p style="color: #ccc; line-height: 1.8;">
+      QuizFlash is a robust desktop application designed to revolutionize the way students manage and study 
+      digital flashcards. Built with Java and Swing GUI, this application provides an intuitive platform for 
+      creating, organizing, and reviewing flashcard sets, making learning more efficient and engaging.
+      <br><br>
+      The application stores flashcard data in simple text files, making it lightweight and portable. Students 
+      can easily create custom study sets, load existing ones, edit questions and answers on the fly, and 
+      practice with an interactive study interface. QuizFlash supports multiple UI themes to accommodate user 
+      preferences and reduce eye strain during extended study sessions.
+      <br><br>
+      Perfect for students preparing for exams, learning new languages, or memorizing important concepts, 
+      QuizFlash streamlines the flashcard experience with a clean, distraction-free interface that keeps 
+      the focus on learning.
+    </p>
+  </div>
+
+  <!-- Key Features -->
+  <div id="features" class="section-card">
+    <h2 class="section-title">🌟 Key Features</h2>
+    
+    <h4 style="color: var(--secondary-color); margin-top: 1.5rem;">📚 Study Mode</h4>
+    <ul class="feature-list">
+      <li><strong>Interactive Review:</strong> Access and review flashcards with an intuitive interface</li>
+      <li><strong>Card Navigation:</strong> Easily flip through questions and answers</li>
+      <li><strong>Progress Tracking:</strong> Keep track of cards reviewed during study sessions</li>
+      <li><strong>Randomized Order:</strong> Option to shuffle cards for better retention</li>
+    </ul>
+
+    <h4 style="color: var(--secondary-color); margin-top: 1.5rem;">✏️ Set Management</h4>
+    <ul class="feature-list">
+      <li><strong>Create New Sets:</strong> Build custom flashcard collections from scratch</li>
+      <li><strong>Load Existing Sets:</strong> Import and work with previously created sets</li>
+      <li><strong>Edit on the Fly:</strong> Modify questions and answers in real-time</li>
+      <li><strong>Delete Cards:</strong> Remove unwanted flashcards from your sets</li>
+    </ul>
+
+    <h4 style="color: var(--secondary-color); margin-top: 1.5rem;">🎨 Customization</h4>
+    <ul class="feature-list">
+      <li><strong>Multiple Themes:</strong> Choose from various UI themes to suit your preference</li>
+      <li><strong>Dark Mode Support:</strong> Reduce eye strain during late-night study sessions</li>
+      <li><strong>Font Adjustments:</strong> Customize text size for better readability</li>
+      <li><strong>Layout Options:</strong> Personalize the study interface</li>
+    </ul>
+
+    <h4 style="color: var(--secondary-color); margin-top: 1.5rem;">💾 Data Management</h4>
+    <ul class="feature-list">
+      <li><strong>Text-Based Storage:</strong> Flashcards saved as simple .txt files for portability</li>
+      <li><strong>Easy Backup:</strong> Copy and share flashcard sets effortlessly</li>
+      <li><strong>Import/Export:</strong> Transfer sets between devices or share with classmates</li>
+      <li><strong>Auto-Save:</strong> Changes automatically saved to prevent data loss</li>
+    </ul>
+  </div>
+
+  <!-- Tech Stack -->
+  <div id="tech-stack" class="section-card">
+    <h2 class="section-title">🛠️ Technology Stack</h2>
+    <div class="tech-grid">
+      <div class="tech-item">
+        <strong>Language</strong>
+        <p style="color: #ccc; margin: 0;">Java</p>
+      </div>
+      <div class="tech-item">
+        <strong>GUI Framework</strong>
+        <p style="color: #ccc; margin: 0;">Java Swing</p>
+      </div>
+      <div class="tech-item">
+        <strong>Storage</strong>
+        <p style="color: #ccc; margin: 0;">Text Files (.txt)</p>
+      </div>
+      <div class="tech-item">
+        <strong>Build Tool</strong>
+        <p style="color: #ccc; margin: 0;">JAR Packaging</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- My Role -->
+  <div id="my-role" class="section-card">
+    <h2 class="section-title">👨‍💻 My Role</h2>
+    <p style="color: #ccc; line-height: 1.8;">
+      <strong style="color: #fff;">Lead Developer & UI/UX Designer</strong><br><br>
+      As the primary developer of QuizFlash, I was responsible for the complete development lifecycle:
+    </p>
+    <ul class="feature-list">
+      <li>Designed and implemented the entire Java Swing GUI architecture</li>
+      <li>Created the file I/O system for reading and writing flashcard data</li>
+      <li>Developed the flashcard study logic and navigation system</li>
+      <li>Implemented multiple UI themes with customizable color schemes</li>
+      <li>Built the CRUD operations for managing flashcard sets</li>
+      <li>Designed intuitive user workflows for creating and editing sets</li>
+      <li>Optimized application performance for smooth user experience</li>
+      <li>Created comprehensive error handling and data validation</li>
+      <li>Packaged the application as an executable JAR for easy distribution</li>
+      <li>Tested across different operating systems for compatibility</li>
+    </ul>
+  </div>
+
+  <!-- Screenshots -->
+  <div id="screenshots" class="section-card">
+    <h2 class="section-title">📸 Application Screenshots</h2>
+    <p style="color: #ccc; margin-bottom: 1rem;">
+      Explore QuizFlash's clean and intuitive interface:
+    </p>
+    <div class="screenshots-grid">
+      <div class="screenshot-item">
+        <img src="../images/quizflashhomepage.jpg" alt="QuizFlash Homepage" onerror="this.style.display='none'">
+        <p>Main Menu - Choose to study, create, load, or edit sets</p>
+      </div>
+      <div class="screenshot-item">
+        <img src="../images/createnewsetquizflash.jpg" alt="Create New Set" onerror="this.style.display='none'">
+        <p>Create New Set - Build custom flashcard collections</p>
+      </div>
+      <div class="screenshot-item">
+        <img src="../images/nowstudyingusingset.jpg" alt="Study Mode" onerror="this.style.display='none'">
+        <p>Study Mode - Interactive flashcard review interface</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Download -->
+  <div id="download" class="section-card">
+    <h2 class="section-title">⬇️ Download & Setup</h2>
+    <p style="color: #ccc; line-height: 1.8;">
+      <strong style="color: #fff;">System Requirements:</strong><br>
+      • Java Development Kit (JDK) 8 or higher<br>
+      • Windows, macOS, or Linux<br>
+      • Minimum 50MB free disk space<br><br>
+      
+      <strong style="color: #fff;">Installation Steps:</strong><br>
+      1. Download the latest release from the releases section<br>
+      2. Extract the ZIP file to your desired location<br>
+      3. Ensure <code style="background: rgba(249, 115, 22, 0.2); padding: 2px 6px; border-radius: 4px;">QuizFlash.jar</code> is present<br>
+      4. Double-click QuizFlash.jar to launch the application<br>
+      5. (Optional) Run Launch.bat for debug mode with console output<br><br>
+
+      <strong style="color: #fff;">Quick Start:</strong><br>
+      • <strong>Study Set:</strong> Load an existing set or create a new one to begin studying<br>
+      • <strong>Create Set:</strong> Build a new flashcard collection with custom Q&A pairs<br>
+      • <strong>Load Set:</strong> Import previously saved flashcard sets from .txt files<br>
+      • <strong>Edit Current Set:</strong> Modify cards in your active study set<br>
+    </p>
+  </div>
+
+  <a href="../portfolio.html" class="back-button">← Back to Portfolio</a>
+</section>
+
+<script>
+  // Smooth scroll for navigation tabs
+  document.querySelectorAll('.nav-link').forEach(link => {
+    link.addEventListener('click', function(e) {
+      e.preventDefault();
+      
+      // Remove active class from all links
+      document.querySelectorAll('.nav-link').forEach(l => l.classList.remove('active'));
+      
+      // Add active class to clicked link
+      this.classList.add('active');
+      
+      // Scroll to section
+      const targetId = this.getAttribute('href');
+      const targetSection = document.querySelector(targetId);
+      if (targetSection) {
+        targetSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+    });
+  });
+
+  // Update active tab on scroll
+  const sections = document.querySelectorAll('.section-card');
+  const navLinks = document.querySelectorAll('.nav-link');
+
+  window.addEventListener('scroll', () => {
+    let current = '';
+    sections.forEach(section => {
+      const sectionTop = section.offsetTop;
+      const sectionHeight = section.clientHeight;
+      if (scrollY >= (sectionTop - 200)) {
+        current = section.getAttribute('id');
+      }
+    });
+
+    navLinks.forEach(link => {
+      link.classList.remove('active');
+      if (link.getAttribute('href') === `#${current}`) {
+        link.classList.add('active');
+      }
+    });
+  });
+</script>
+
+<script src="../main.js" defer></script>
+</body>
+</html>

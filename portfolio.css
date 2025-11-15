@@ -131,13 +131,13 @@ body {
 
 /* ===================== MAIN SECTION ===================== */
 .main-section {
-  min-height: 100vh;
+  min-height: 60vh;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   text-align: center;
-  padding: 8rem 2rem 4rem;
+  padding: 8rem 2rem 2rem;
   box-sizing: border-box;
 }
 
@@ -221,6 +221,13 @@ model-viewer {
 /* Alternate angle for every other card */
 .glass-card:nth-child(even) {
   transform: perspective(1000px) rotateY(-5deg);
+}
+
+.row > i.bi-chevron-down {
+  display: block;
+  margin: -5rem auto 0;
+  font-size: 3rem;
+  animation: bounce 2s infinite;
 }
 
 /* Reflection effect overlay */

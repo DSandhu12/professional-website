@@ -1,0 +1,549 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Vyper Compiler Project</title>
+
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="../portfolio.css">
+  <style>
+    /* Vyper Emerald Green Theme */
+    :root {
+      --primary-color: #059669;
+      --secondary-color: #10b981;
+    }
+
+    .project-detail-section {
+      max-width: 1000px;
+      margin: 0 auto;
+      padding: 8rem 2rem 4rem;
+    }
+    
+    .detail-header {
+      text-align: center;
+      margin-bottom: 3rem;
+    }
+    
+    .detail-title {
+      font-size: 2.5rem;
+      font-weight: 700;
+      background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      margin-bottom: 1rem;
+    }
+    
+    .detail-tagline {
+      font-size: 1.3rem;
+      color: var(--secondary-color);
+      font-style: italic;
+      margin-bottom: 2rem;
+    }
+    
+    .detail-image {
+      width: 100%;
+      max-width: 600px;
+      display: block;
+      margin: 2rem auto;
+      border-radius: 20px;
+      box-shadow: 0 12px 48px rgba(0, 0, 0, 0.3);
+    }
+    
+    /* Sticky Navigation */
+    .sticky-nav {
+      position: sticky;
+      top: 80px;
+      background: rgba(0, 0, 0, 0.95);
+      backdrop-filter: blur(20px);
+      z-index: 50;
+      padding: 1rem 0;
+      margin-bottom: 2rem;
+      border-radius: 12px;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+    
+    .nav-tabs {
+      border: none;
+      display: flex;
+      gap: 0.5rem;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+    
+    .nav-tabs .nav-link {
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      color: #ccc;
+      border-radius: 8px;
+      padding: 0.6rem 1.2rem;
+      transition: all 0.3s ease;
+    }
+    
+    .nav-tabs .nav-link:hover {
+      background: rgba(5, 150, 105, 0.2);
+      color: var(--secondary-color);
+    }
+    
+    .nav-tabs .nav-link.active {
+      background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
+      color: #fff;
+      border-color: var(--secondary-color);
+    }
+    
+    .section-card {
+      background: rgba(255, 255, 255, 0.06);
+      backdrop-filter: blur(28px);
+      border-radius: 20px;
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      padding: 2rem;
+      margin-bottom: 2rem;
+      scroll-margin-top: 150px;
+    }
+    
+    .section-title {
+      font-size: 1.8rem;
+      font-weight: 600;
+      color: var(--secondary-color);
+      margin-bottom: 1.5rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    
+    .feature-list {
+      list-style: none;
+      padding: 0;
+    }
+    
+    .feature-list li {
+      padding: 0.8rem 0;
+      padding-left: 2rem;
+      position: relative;
+      color: #ccc;
+      line-height: 1.6;
+    }
+    
+    .feature-list li::before {
+      content: "✓";
+      position: absolute;
+      left: 0;
+      color: var(--secondary-color);
+      font-weight: bold;
+      font-size: 1.2rem;
+    }
+
+    .feature-list li strong {
+      color: #fff;
+    }
+    
+    .tech-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+      gap: 1rem;
+      margin-top: 1rem;
+    }
+    
+    .tech-item {
+      background: rgba(5, 150, 105, 0.1);
+      border: 1px solid rgba(5, 150, 105, 0.3);
+      border-radius: 12px;
+      padding: 1rem;
+      text-align: center;
+    }
+    
+    .tech-item strong {
+      color: var(--secondary-color);
+      display: block;
+      margin-bottom: 0.5rem;
+    }
+    
+    .back-button {
+      display: inline-block;
+      margin-top: 2rem;
+      padding: 0.8rem 1.5rem;
+      background: rgba(255, 255, 255, 0.1);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      border-radius: 12px;
+      color: #fff;
+      text-decoration: none;
+      transition: all 0.3s ease;
+    }
+    
+    .back-button:hover {
+      background: rgba(255, 255, 255, 0.15);
+      color: var(--secondary-color);
+      transform: translateY(-2px);
+    }
+    
+    .external-link {
+      color: var(--secondary-color);
+      text-decoration: none;
+      font-weight: 600;
+    }
+    
+    .external-link:hover {
+      text-decoration: underline;
+    }
+
+    .code-block {
+      background: rgba(0, 0, 0, 0.5);
+      border: 1px solid rgba(5, 150, 105, 0.3);
+      border-radius: 8px;
+      padding: 1rem;
+      margin: 1rem 0;
+      overflow-x: auto;
+    }
+
+    .code-block code {
+      color: var(--secondary-color);
+      font-family: 'Courier New', monospace;
+    }
+
+    .compiler-stages {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1rem;
+      margin-top: 1.5rem;
+    }
+
+    .stage-item {
+      background: rgba(5, 150, 105, 0.1);
+      border-left: 3px solid var(--secondary-color);
+      padding: 1rem;
+      border-radius: 8px;
+    }
+
+    .stage-item h5 {
+      color: var(--secondary-color);
+      margin-bottom: 0.5rem;
+      font-size: 1.1rem;
+    }
+
+    .stage-item p {
+      color: #ccc;
+      font-size: 0.9rem;
+      margin: 0;
+    }
+  </style>
+</head>
+<body>
+
+<!-- Navbar -->
+<nav class="navbar">
+  <div class="nav-left">
+    <h1 class="nav-logo" style="background: linear-gradient(90deg, #059669, #10b981, #059669); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">Vyper Compiler</h1>
+  </div>
+  <div class="nav-right">
+    <a href="../index.html" class="nav-link">Home</a>
+    <div class="dropdown">
+      <a href="#" class="nav-link dropdown-toggle">About Me</a>
+      <div class="dropdown-content">
+        <a href="../advocacy.html">Advocacy</a>
+        <a href="../education.html">Education</a>
+        <a href="../skills.html">Techstack and Skills</a>
+      </div>
+    </div>
+    <div class="dropdown">
+      <a href="#" class="nav-link dropdown-toggle">Achievements</a>
+      <div class="dropdown-content">
+        <a href="../experience.html">Experience</a>
+        <a href="../certification.html">Certifications and Training</a>
+      </div>
+    </div>
+    <a href="../portfolio.html" class="nav-link">Portfolio</a>
+    <a href="../contact.html" class="nav-link">Contact</a>
+  </div>
+</nav>
+
+<!-- Project Details -->
+<section class="project-detail-section">
+  <div class="detail-header">
+    <h1 class="detail-title">Vyper Compiler: Python-JS Hybrid Language</h1>
+    <p class="detail-tagline">"Clean Syntax, Powerful Compilation!"</p>
+    <p style="color: #ccc;">October 2024</p>
+  </div>
+
+  <img src="../images/vyper.png" alt="Vyper Compiler" class="detail-image">
+
+  <!-- Sticky Navigation Tabs -->
+  <div class="sticky-nav">
+    <ul class="nav nav-tabs">
+      <li class="nav-item">
+        <a class="nav-link active" href="#overview">Overview</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#features">Features</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#architecture">Architecture</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#tech-stack">Tech Stack</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#my-role">My Role</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#syntax">Syntax Guide</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#links">Links</a>
+      </li>
+    </ul>
+  </div>
+
+  <!-- Project Overview -->
+  <div id="overview" class="section-card">
+    <h2 class="section-title">📋 Project Overview</h2>
+    <p style="color: #ccc; line-height: 1.8;">
+      Vyper is a modern programming language that combines the clean, intuitive syntax of Python with the 
+      flexibility of JavaScript, while introducing unique features designed for readability and simplicity. 
+      This project implements a full-featured compiler that transforms Vyper source code into executable Python, 
+      bridging the gap between high-level language design and practical implementation.
+      <br><br>
+      Built entirely in C++17, the Vyper compiler follows traditional compiler architecture with distinct phases: 
+      lexical analysis, syntax parsing, semantic checking, intermediate representation (IR) generation, and final 
+      code generation. The compiler produces optimized Python code that can be executed immediately, making Vyper 
+      an excellent educational tool for understanding compiler construction while providing a practical programming 
+      language for everyday use.
+      <br><br>
+      Developed by Team AGILE as an academic project, Vyper demonstrates advanced concepts in programming language 
+      theory, compiler design, and software engineering—showcasing the team's ability to build complex, 
+      production-quality systems from scratch.
+    </p>
+  </div>
+
+  <!-- Key Features -->
+  <div id="features" class="section-card">
+    <h2 class="section-title">🌟 Language Features</h2>
+    
+    <h4 style="color: var(--secondary-color); margin-top: 1.5rem;">🔤 Clean Syntax</h4>
+    <ul class="feature-list">
+      <li><strong>Python-Inspired:</strong> Familiar indentation-based structure for readability</li>
+      <li><strong>JavaScript Elements:</strong> Flexible syntax with curly braces for compound statements</li>
+      <li><strong>Unique Operators:</strong> Custom operators like ^ for string concatenation</li>
+      <li><strong>Intuitive Keywords:</strong> Clear, descriptive keywords (var, func, loop, times)</li>
+    </ul>
+
+    <h4 style="color: var(--secondary-color); margin-top: 1.5rem;">📊 Data Types & Operations</h4>
+    <ul class="feature-list">
+      <li><strong>Primitive Types:</strong> Strings, integers, floats, booleans</li>
+      <li><strong>Collections:</strong> Arrays with full CRUD operations</li>
+      <li><strong>Arithmetic:</strong> Standard operators (+, -, *, /, %)</li>
+      <li><strong>Logical:</strong> Short-circuiting AND (&&), OR (||), NOT (!)</li>
+      <li><strong>Comparison:</strong> Full suite of relational operators</li>
+    </ul>
+
+    <h4 style="color: var(--secondary-color); margin-top: 1.5rem;">🔄 Control Flow</h4>
+    <ul class="feature-list">
+      <li><strong>Conditionals:</strong> if-else if-else statements with clear syntax</li>
+      <li><strong>For Loops:</strong> Iterate over array elements naturally</li>
+      <li><strong>While Loops:</strong> Condition-based iteration</li>
+      <li><strong>Times Loops:</strong> Repeat-N-times construct for simplicity</li>
+    </ul>
+
+    <h4 style="color: var(--secondary-color); margin-top: 1.5rem;">⚙️ Functions & Modularity</h4>
+    <ul class="feature-list">
+      <li><strong>Function Declaration:</strong> Clean func keyword syntax</li>
+      <li><strong>Parameters:</strong> Support for multiple parameters</li>
+      <li><strong>Return Values:</strong> Explicit return statements</li>
+      <li><strong>Scope Management:</strong> Proper variable scoping</li>
+    </ul>
+
+    <h4 style="color: var(--secondary-color); margin-top: 1.5rem;">🛠️ Compiler Features</h4>
+    <ul class="feature-list">
+      <li><strong>Multi-Stage Compilation:</strong> Lexer → Parser → Semantic → IR → Code Gen</li>
+      <li><strong>Error Reporting:</strong> Detailed error messages with line numbers</li>
+      <li><strong>Optimization:</strong> IR-level optimizations before code generation</li>
+      <li><strong>Verbose Mode:</strong> Watch compilation progress in real-time</li>
+      <li><strong>Custom Output:</strong> Specify executable name with -o flag</li>
+    </ul>
+  </div>
+
+  <!-- Architecture -->
+  <div id="architecture" class="section-card">
+    <h2 class="section-title">🏗️ Compiler Architecture</h2>
+    <p style="color: #ccc; margin-bottom: 1rem;">
+      The Vyper compiler consists of five distinct stages, each handling a specific aspect of compilation:
+    </p>
+    <div class="compiler-stages">
+      <div class="stage-item">
+        <h5>1. Lexical Analysis</h5>
+        <p>Tokenizes source code into meaningful symbols (keywords, operators, identifiers)</p>
+      </div>
+      <div class="stage-item">
+        <h5>2. Syntax Analysis</h5>
+        <p>Builds Abstract Syntax Tree (AST) from token stream using recursive descent parsing</p>
+      </div>
+      <div class="stage-item">
+        <h5>3. Semantic Analysis</h5>
+        <p>Checks for semantic errors (type mismatches, undefined variables, scope violations)</p>
+      </div>
+      <div class="stage-item">
+        <h5>4. IR Generation</h5>
+        <p>Converts AST to Intermediate Representation for optimization and platform independence</p>
+      </div>
+      <div class="stage-item">
+        <h5>5. Code Generation</h5>
+        <p>Translates IR into executable Python code with proper formatting and runtime support</p>
+      </div>
+    </div>
+
+    <div class="code-block" style="margin-top: 2rem;">
+      <strong style="color: var(--secondary-color);">Project Structure:</strong>
+      <pre style="color: #ccc; margin: 0.5rem 0;"><code>vypr/
+├── include/          # Header files (.h)
+├── src/              # Implementation (.cpp)
+├── examples/         # Sample Vyper programs
+├── build/            # Compiled binaries
+└── CMakeLists.txt    # Build configuration</code></pre>
+    </div>
+  </div>
+
+  <!-- Tech Stack -->
+  <div id="tech-stack" class="section-card">
+    <h2 class="section-title">🛠️ Technology Stack</h2>
+    <div class="tech-grid">
+      <div class="tech-item">
+        <strong>Language</strong>
+        <p style="color: #ccc; margin: 0;">C++17</p>
+      </div>
+      <div class="tech-item">
+        <strong>Build System</strong>
+        <p style="color: #ccc; margin: 0;">CMake 3.12+</p>
+      </div>
+      <div class="tech-item">
+        <strong>Compiler</strong>
+        <p style="color: #ccc; margin: 0;">GCC / Clang / MinGW</p>
+      </div>
+      <div class="tech-item">
+        <strong>Target</strong>
+        <p style="color: #ccc; margin: 0;">Python 3.x</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- My Role -->
+  <div id="my-role" class="section-card">
+    <h2 class="section-title">👨‍💻 My Role</h2>
+    <p style="color: #ccc; line-height: 1.8;">
+      <strong style="color: #fff;">Compiler Developer & Language Designer</strong><br><br>
+      As a core member of Team AGILE, I contributed to multiple aspects of the Vyper compiler:
+    </p>
+    <ul class="feature-list">
+      <li>Collaborated on language syntax design and grammar specification</li>
+      <li>Implemented portions of the lexical analyzer for tokenization</li>
+      <li>Contributed to the parser development using recursive descent techniques</li>
+      <li>Helped design the Abstract Syntax Tree (AST) node structures</li>
+      <li>Assisted with semantic analysis and type checking implementation</li>
+      <li>Tested compiler with various Vyper programs to identify edge cases</li>
+      <li>Debugged compilation errors and optimized code generation</li>
+      <li>Documented language features and compiler usage instructions</li>
+      <li>Created example programs demonstrating Vyper's capabilities</li>
+      <li>Configured CMake build system for cross-platform compilation</li>
+    </ul>
+  </div>
+
+  <!-- Syntax Guide -->
+  <div id="syntax" class="section-card">
+    <h2 class="section-title">📖 Quick Syntax Guide</h2>
+    
+    <h4 style="color: var(--secondary-color); margin-top: 1.5rem;">Variable Declaration</h4>
+    <div class="code-block">
+      <code>var name = "World"<br>var age = 25<br>var pi = 3.14<br>var isActive = true</code>
+    </div>
+
+    <h4 style="color: var(--secondary-color); margin-top: 1.5rem;">Control Flow</h4>
+    <div class="code-block">
+      <code>if age >= 18:<br>&nbsp;&nbsp;print "You are an adult"<br>else:<br>&nbsp;&nbsp;print "You are a minor"</code>
+    </div>
+
+    <h4 style="color: var(--secondary-color); margin-top: 1.5rem;">Loops</h4>
+    <div class="code-block">
+      <code>loop 5 times:<br>&nbsp;&nbsp;print "Hello!"<br><br>var nums = [1, 2, 3]<br>loop num in nums:<br>&nbsp;&nbsp;print num</code>
+    </div>
+
+    <h4 style="color: var(--secondary-color); margin-top: 1.5rem;">Functions</h4>
+    <div class="code-block">
+      <code>func greet(name):<br>&nbsp;&nbsp;print "Hello, " ^ name ^ "!"<br><br>func add(a, b):<br>&nbsp;&nbsp;return a + b</code>
+    </div>
+
+    <h4 style="color: var(--secondary-color); margin-top: 1.5rem;">String Concatenation</h4>
+    <div class="code-block">
+      <code>var greeting = "Hello, " ^ name ^ "!"</code>
+    </div>
+  </div>
+
+  <!-- Links -->
+  <div id="links" class="section-card">
+    <h2 class="section-title">🔗 Project Resources</h2>
+    <p style="color: #ccc;">
+      <strong>GitHub Repository:</strong> <a href="#" class="external-link">Coming Soon</a><br>
+      <strong>Documentation:</strong> Complete language reference in README.md<br>
+      <strong>Example Programs:</strong> Available in examples/ directory<br>
+      <strong>Team AGILE:</strong> Dane Quintano, Jansen Moral, JC Paglinawan, Dharmveer Sandhu<br>
+      <strong>License:</strong> MIT License
+    </p>
+    
+    <h4 style="color: var(--secondary-color); margin-top: 1.5rem;">Build Instructions</h4>
+    <div class="code-block">
+      <code>git clone https://github.com/YOUR_USERNAME/VYPR.git<br>cd vypr<br>mkdir build<br>cd build<br>cmake -G "MinGW Makefiles" ..<br>cmake --build .</code>
+    </div>
+
+    <h4 style="color: var(--secondary-color); margin-top: 1.5rem;">Running Vyper Programs</h4>
+    <div class="code-block">
+      <code>build/vypr path/to/program.vy<br>build/vypr -o my_program path/to/program.vy<br>build/vypr --verbose path/to/program.vy</code>
+    </div>
+  </div>
+
+  <a href="../portfolio.html" class="back-button">← Back to Portfolio</a>
+</section>
+
+<script>
+  // Smooth scroll for navigation tabs
+  document.querySelectorAll('.nav-link').forEach(link => {
+    link.addEventListener('click', function(e) {
+      e.preventDefault();
+      
+      // Remove active class from all links
+      document.querySelectorAll('.nav-link').forEach(l => l.classList.remove('active'));
+      
+      // Add active class to clicked link
+      this.classList.add('active');
+      
+      // Scroll to section
+      const targetId = this.getAttribute('href');
+      const targetSection = document.querySelector(targetId);
+      if (targetSection) {
+        targetSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+    });
+  });
+
+  // Update active tab on scroll
+  const sections = document.querySelectorAll('.section-card');
+  const navLinks = document.querySelectorAll('.nav-link');
+
+  window.addEventListener('scroll', () => {
+    let current = '';
+    sections.forEach(section => {
+      const sectionTop = section.offsetTop;
+      const sectionHeight = section.clientHeight;
+      if (scrollY >= (sectionTop - 200)) {
+        current = section.getAttribute('id');
+      }
+    });
+
+    navLinks.forEach(link => {
+      link.classList.remove('active');
+      if (link.getAttribute('href') === `#${current}`) {
+        link.classList.add('active');
+      }
+    });
+  });
+</script>
+
+<script src="../main.js" defer></script>
+</body>
+</html>

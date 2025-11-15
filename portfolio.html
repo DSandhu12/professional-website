@@ -60,28 +60,46 @@
       </model-viewer>
     </div>
 
-    <!-- Right: Title + subtitle -->
-    <div class="col-lg-7 col-md-6 text-start">
-      <div class="experience-header" style="display: flex; align-items: center; gap: 2rem;">
-        <!-- ENLARGED folder icon next to the title -->
-        <img src="images/folderproject.png" alt="Folder Icon"
-             style="width: 200px; height: 200px; object-fit: contain; flex-shrink:0;">
-        <div class="text-perspective">
-          <div class="text-container" style="transform:none;">
-            <span class="gradient-text" style="font-size:3.25rem;display:block;">MY PROJECT PORTFOLIO</span>
-            <span class="experience-subheader" style="font-size:1.1rem;margin-top:0.8rem;color:#cfcfcf;">
+
+<!-- HERO: Centered title section -->
+<section class="main-section container" style="padding-top:8rem; min-height:60vh;">
+
+  <!-- Title + Subtitle -->
+  <div class="row align-items-center justify-content-center" style="max-width:1200px; margin:0 auto;">
+    <div class="col-12 text-center">
+      <div class="experience-header" style="display:flex; flex-direction:column; align-items:center; gap:0.5rem;">
+        
+        <div class="text-perspective parallax-container">
+          <div class="text-container" style="transform:none; align-items:center;">
+
+            <!-- Title -->
+            <span class="gradient-text" style="font-size:3.25rem; display:block;">
+              MY PROJECT PORTFOLIO
+            </span>
+
+            <!-- Subtitle -->
+            <span class="experience-subheader" 
+                  style="font-size:1.1rem; margin-top:0.8rem; color:#cfcfcf; text-align:center; max-width:700px;">
               Selected IT projects — click a card for a dedicated page with details, demo links, and setup instructions.
             </span>
+
           </div>
         </div>
-      </div>
 
-      <!-- CHEVRON (same placement & class as your experience page) -->
-      <i class="bi bi-chevron-down" style="display:block; margin-top:1.5rem; font-size:2.2rem; color:#ffffff;"></i>
+      </div>
     </div>
   </div>
+
+  <!-- Chevron (same section, spaced apart) -->
+  <div class="row" style="margin-top:3rem;">
+    <div class="col-12 text-center">
+      <i class="bi bi-chevron-down" style="font-size:2.2rem; opacity:0.8;"></i>
+    </div>
+  </div>
+
 </section>
 
+</section>
 <!-- PROJECTS: stacked top-to-bottom -->
 <section class="five-rows-section container" style="max-width:1000px;">
 
@@ -121,8 +139,8 @@
         <p class="row-paragraph">
           A POS + inventory platform for sari-sari stores — cashier POS, inventory tracking, sales reports, and audit logs.
         </p>
-        <a class="project-link" href="projects/sari.html">Open SARI</a>
-        <a class="project-link" href="https://sari.great-site.net/" target="_blank" rel="noopener" style="margin-left:.6rem;">Live demo</a>
+        <a class="project-link" href="portfolio_sari.html">Open SARI</a>
+        <a class="project-link" href="https://youtu.be/h1Kc-AwdSus" target="_blank" rel="noopener" style="margin-left:.6rem;">Video demo</a>
       </div>
     </div>
   </div>
@@ -142,14 +160,14 @@
         <p class="row-paragraph">
           Java + Swing desktop app for creating, editing, and studying flashcards stored as plain text. Supports themes and import/export.
         </p>
-        <a class="project-link" href="projects/quizflash.html">Open QuizFlash</a>
+        <a class="project-link" href="portfolio_quizflash.html">Open QuizFlash</a>
         <a class="project-link" href="#" data-action="external-download" style="margin-left:.6rem;">Download</a>
       </div>
     </div>
   </div>
 
 
-  <!-- VYPER COMPILER (new) -->
+  <!-- VYPER COMPILERn -->
   <article class="glass-card project-card">
     <div class="row align-items-center g-0">
       <div class="col-md-4 text-center">
@@ -161,7 +179,7 @@
         <p class="row-paragraph">
           A compact compiler tool for translating Vyper smart contract code into optimized bytecode. Includes syntax checking, simple optimization passes, and command-line usage for local dev workflows.
         </p>
-        <a class="project-link" href="projects/vyper.html">Open Vyper Compiler</a>
+        <a class="project-link" href="portfolio_vyper.html">Open Vyper Compiler</a>
         <a class="project-link" href="#" style="margin-left:.6rem;">Repository</a>
       </div>
     </div>
